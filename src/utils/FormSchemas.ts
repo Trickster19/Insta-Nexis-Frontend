@@ -30,8 +30,7 @@ const loginSchema = z.object({
       .string()
       .min(3, { message: "Username must be at least 3 characters" })
       .max(30, { message: "Username must not exceed 30 characters" })
-      .regex(/^[a-zA-Z0-9_]+$/, { message: "Username can only contain letters, numbers, and underscores" }),
-  
+      ,
     email: z
       .string()
       .email({ message: "Invalid email address" }),

@@ -108,7 +108,7 @@ export const Register = () => {
                     />
                   </FormControl>
                   <FormDescription className="text-sm text-gray-300 mt-1">
-                    Your unique username for logging in.
+                    Your instagram username for logging in.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
