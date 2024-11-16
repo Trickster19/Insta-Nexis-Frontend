@@ -1,16 +1,18 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
-// import { Button } from "./components/ui/button";
-import HeroSection from "./sections/HeroSection";
-// import { useStore } from "./store/store";
+// import useStore from "@/store";
+import { router } from "./routes";
 
 // interface CountState {
 //   count: number;
 //   increase: () => void;
 // }
 function App() {
-  // const count = useStore((state: CountState) => state.count);
-  // const increase = useStore((state: CountState) => state.increase);
-  return <HeroSection />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;
