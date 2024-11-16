@@ -56,13 +56,13 @@ export const Navbar = () => {
       <div className="items-center gap-x-6 flex justify-around">
         {/* Login Button with orange background */}
         <motion.div
-          whileHover={{ scale: 1.05, backgroundColor: "#f57c00" }} // Lighter orange hover effect
+          whileHover={{ scale: 1.05 }} // Lighter orange hover effect
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
           <Button
             onClick={() => navigate("/login")}
-            className="bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out rounded-lg py-2 px-4"
+            className="rounded-lg bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out  py-3 px-7"
           >
             Login
           </Button>
@@ -70,13 +70,13 @@ export const Navbar = () => {
 
         {/* Sign Up Button with orange background */}
         <motion.div
-          whileHover={{ scale: 1.05, backgroundColor: "#f57c00" }} // Lighter orange hover effect
+          whileHover={{ scale: 1.05 }} // Lighter orange hover effect
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 200 }}
         >
           <Button
             onClick={() => navigate("/register")}
-            className="bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out rounded-lg py-2 px-4"
+            className="rounded-lg bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-3 px-7 uppercase"
           >
             Sign Up
           </Button>
