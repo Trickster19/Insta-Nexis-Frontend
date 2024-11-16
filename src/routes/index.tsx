@@ -1,21 +1,57 @@
 import { createBrowserRouter } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import  Layout  from "@/components/Layout";
+import ProtectedRoute  from "@/components/ProtectedRoute";
 
-import { Layout } from "@/components/Layout";
-import { Home } from "@/components/Home";
-import { Login } from "@/components/Login";
-import { Register } from "@/components/Register";
+// Lazy load components
+const Home = lazy(() => import("@/components/Home"));
+const Login = lazy(() => import("@/components/Login"));
+const Register = lazy(() => import("@/components/Register"));
+const Profile = lazy(() => import("@/components/Profile"));
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+        <Layout />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<div className="text-center">Loading Home...</div>}>
+            <Home />
+          </Suspense>
+        ),
       },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
+      {
+        path: "login",
+        element: (
+          <Suspense fallback={<div className="text-center">Loading Login...</div>}>
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <Suspense fallback={<div className="text-center">Loading Register...</div>}>
+            <Register />
+          </Suspense>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <Suspense fallback={<div className="text-center">Loading Profile...</div>}>
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);

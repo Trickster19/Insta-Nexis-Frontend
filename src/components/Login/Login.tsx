@@ -12,12 +12,15 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+
 import { motion } from "framer-motion"
+import useAuth from "@/store"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
-  const [showPassword, setShowPassword] = useState(false)
-
+ 
+    const setaccessToken=useAuth(state=>state.setAccessToken)
+    const navigate=useNavigate();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -26,8 +29,16 @@ export const Login = () => {
     },
   })
 
+
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     console.log(data)
+    setaccessToken("Haaris");
+       form.reset({
+        username:'',
+        password:''
+       })
+       navigate("/profile")
+       
   }
 
   return (
@@ -77,16 +88,10 @@ export const Login = () => {
                       <Input
                         placeholder="Enter your password"
                         {...field}
-                        type={showPassword ? "text" : "password"}
+                        type ="password"
                         className="p-6 bg-white rounded-lg border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
                       />
-                      <Button
-                        variant={"ghost"}
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-sm"
-                      >
-                        {showPassword ? "Hide" : "Show"}
-                      </Button>
+                   
                     </div>
                   </FormControl>
                   <FormMessage />

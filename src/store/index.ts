@@ -1,3 +1,3 @@
-import { useStore } from "./store";
+import { useAuth } from "./store";
 
-export default useStore;
+export default useAuth;
