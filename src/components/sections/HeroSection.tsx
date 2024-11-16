@@ -28,7 +28,7 @@ const HeroSection = () => {
             transition={{ duration: 1, ease: "easeInOut" }}
             className="mb-6"
           >
-            <h1 className="text-5xl md:text-6xl font-extrabold text-[#ff8d3b] drop-shadow-lg uppercase mb-4 leading-tight">
+            <h1 className="h-30 text-5xl md:text-6xl font-extrabold text-[#ff8d3b] drop-shadow-lg uppercase mb-4 leading-tight">
               <Typewriter
                 options={{
                   strings: [
