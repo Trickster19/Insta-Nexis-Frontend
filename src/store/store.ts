@@ -1,11 +1,17 @@
-import { create } from 'zustand'
+import { create } from "zustand";
 
-
-  interface CountState {
-    count: number,
-    increase: () => void
+interface TokenState {
+  accessToken: string | null;
+  getAccessToken: () => string | null;
+  setAccessToken: (accessToken: string) => void;
 }
-export const useStore = create<CountState>((set) => ({
-  count: 0,
-  increase: () => set((state) => ({ count: state.count + 1 }))
-}))
+
+export const useStore = create<TokenState>((set, get) => ({
+  accessToken: null,
+  getAccessToken: () => {
+    return get().accessToken; // Use the getter function to retrieve the current state
+  },
+  setAccessToken: (accessToken) => {
+    set({ accessToken }); // Update the state with the new accessToken
+  },
+}));

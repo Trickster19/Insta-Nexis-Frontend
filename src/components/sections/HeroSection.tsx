@@ -21,7 +21,7 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-7xl gap-10">
         {/* Left Column: Heading and CTA */}
-        <div className="flex-1 text-center md:text-left">
+        <div className="flex-1 text-center ">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,8 +79,8 @@ const HeroSection = () => {
             },
           }}
         >
-          <div className="p-15 group">
-            <div className="relative w-[400px] h-[400px] group-hover:animate-rotate">
+          <div className="p-15 ">
+            <div className="relative w-[400px] h-[400px] animate-rotate">
               {/* Dashed Border Box */}
               <div className="relative w-full h-full border-4 border-dashed border-[#0461cb] rounded-[50%]">
                 {/* Cards Positioned Along the Border */}
