@@ -9,7 +9,7 @@ const AuthLayout: React.FC = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <div
-        className="w-1/2 text-light flex flex-col justify-between p-8"
+        className="hidden md:w-1/2 text-light md:flex flex-col justify-between p-8"
         style={{
           backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.6)), url(${BackgroundImage})`,
           backgroundSize: "cover", // Ensures the image covers the entire area
@@ -30,9 +30,12 @@ const AuthLayout: React.FC = () => {
         </div>
       </div>
 
+      <div className="md:hidden fixed top-4 left-4">
+        <TitleName />
+      </div>
       {/* Content */}
       <motion.div
-        className="w-1/2 bg-light flex justify-center items-center p-8"
+        className="w-full md:w-1/2 bg-light flex justify-center items-center p-8"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -50 }}

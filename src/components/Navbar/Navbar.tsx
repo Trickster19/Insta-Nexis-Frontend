@@ -77,7 +77,7 @@ export const Navbar = () => {
             </Button>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             whileHover={{ scale: 1.05 }} // Lighter orange hover effect
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 200 }}
@@ -89,7 +89,7 @@ export const Navbar = () => {
               Sign Up
               <ArrowRight size={40} />
             </Button>
-          </motion.div>
+          </motion.div> */}
         </div>
       )}
     </motion.nav>

@@ -81,7 +81,7 @@ export const Register = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full min-h-[500px] mx-auto p-6"
+        className="w-full max-w-2xl min-h-[500px] mx-auto p-6"
       >
         <Form {...(currentStep === 1 ? step1Form : step2Form)}>
           {currentStep === 1 && (
