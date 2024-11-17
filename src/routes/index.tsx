@@ -9,7 +9,7 @@ const Home = lazy(() => import("@/components/Home"));
 const Login = lazy(() => import("@/components/Login"));
 const Register = lazy(() => import("@/components/Register"));
 const Profile = lazy(() => import("@/components/Profile"));
-
+const Product =lazy(() => import("@/components/Product"));
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +41,18 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path:"product/:id",
+        element: (
+          <ProtectedRoute authenticationRequired={true}>
+            <Suspense
+              fallback={<div className="text-center">Loading Product...</div>}
+            >
+              <Product />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+      }
     ],
   },
   {
