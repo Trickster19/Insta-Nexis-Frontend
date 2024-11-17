@@ -32,13 +32,13 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: (
-          <Suspense
-            fallback={<div className="text-center">Loading Profile...</div>}
-          >
-            <ProtectedRoute>
+          <ProtectedRoute authenticationRequired={true}>
+            <Suspense
+              fallback={<div className="text-center">Loading Profile...</div>}
+            >
               <Profile />
-            </ProtectedRoute>
-          </Suspense>
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
     ],
@@ -50,21 +50,25 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: (
-          <Suspense
-            fallback={<div className="text-center">Loading Login...</div>}
-          >
-            <Login />
-          </Suspense>
+          <ProtectedRoute authenticationRequired={false}>
+            <Suspense
+              fallback={<div className="text-center">Loading Login...</div>}
+            >
+              <Login />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "register",
         element: (
-          <Suspense
-            fallback={<div className="text-center">Loading Register...</div>}
-          >
-            <Register />
-          </Suspense>
+          <ProtectedRoute authenticationRequired={false}>
+            <Suspense
+              fallback={<div className="text-center">Loading Register...</div>}
+            >
+              <Register />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
     ],
