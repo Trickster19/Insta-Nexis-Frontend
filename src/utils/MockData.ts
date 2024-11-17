@@ -60,7 +60,7 @@ const products = [
       name: "Fitness Tracker",
       company: "HealthPulse",
       price: "79.99",
-      description: "Track your fitness journey with our all-in-one fitness tracker.",
+      description: "Track your fitness journey with our all-in-one fitness tracker. lorvfasdngflkowdjsnfoiajdsov;fija;spodfajsdofija;iosdfjiaos;jfioa;sjdfoiajsd;ofijasodfjinaosd;faoifnasdngfosa;ingosngingosdanoiasgnjsoignjgnjg;oisnaSbon",
     },
     {
       image: "https://picsum.photos/300/200?random=10",

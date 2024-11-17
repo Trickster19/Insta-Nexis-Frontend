@@ -15,25 +15,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { ChevronLeft, ChevronRight, HandMetal } from "lucide-react";
 import { Link } from "react-router-dom";
+import { registrationSchemaStep1, registrationSchemaStep2 } from "@/utils/FormSchemas";
+import useAuth from "@/store";
 
-// Validation schema for both steps
-const registrationSchemaStep1 = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(8, "Password must be at least 8 characters long"),
-});
-
-const registrationSchemaStep2 = z.object({
-  name: z.string().min(1, "Name is required"),
-  companyName: z.string().optional(),
-  email: z.string().email("Invalid email address"),
-});
 
 type Step1FormValues = z.infer<typeof registrationSchemaStep1>;
 type Step2FormValues = z.infer<typeof registrationSchemaStep2>;
 
 export const Register = () => {
   const [currentStep, setCurrentStep] = useState(1); // Track current step
-
+  const setAccesstoken=useAuth(state=>state.setAccessToken)
   // Step 1 form
   const step1Form = useForm<Step1FormValues>({
     resolver: zodResolver(registrationSchemaStep1),
@@ -59,6 +50,11 @@ export const Register = () => {
       ...step1Form.getValues(),
       ...data,
     });
+
+    step1Form.reset();
+    step2Form.reset();
+    setCurrentStep(1);
+    setAccesstoken("Haaris")
   };
 
   return (
@@ -81,7 +77,7 @@ export const Register = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-2xl min-h-[500px] mx-auto p-6"
+        className="w-full max-w-2xl min-h-[500px] mx-auto p-6 py-0"
       >
         <Form {...(currentStep === 1 ? step1Form : step2Form)}>
           {currentStep === 1 && (
@@ -122,6 +118,26 @@ export const Register = () => {
                   <FormItem>
                     <FormLabel className="text-[#0f2a54] font-medium">
                       Password
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your password"
+                        {...field}
+                        type="password"
+                        className="w-full p-5 rounded-sm bg-white border border-gray-300 focus:ring-2 focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={step1Form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[#0f2a54] font-medium">
+                      Confirm Password
                     </FormLabel>
                     <FormControl>
                       <Input
