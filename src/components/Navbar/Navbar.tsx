@@ -1,13 +1,17 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import useAuth from "@/store";
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0); // Track scroll value
-
+  const accesstoken=useAuth(state=>state.accessToken);
+  const location=useLocation();
+  const currentPath=location.pathname;
+  console.log("**URL",currentPath)
   // Scroll event handler to update scrollY value
   const handleScroll = () => {
     setScrollY(window.scrollY); // Update scrollY value
@@ -55,7 +59,22 @@ export const Navbar = () => {
         </motion.span>
       </div>
 
-      <div className="items-center gap-x-6 flex justify-around">
+     {accesstoken? <div className="items-center gap-x-6 flex justify-end">
+
+      <motion.div
+          whileHover={{ scale: 1.05 }} // Lighter orange hover effect
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 200 }}
+        >
+          <Button
+            onClick={() => navigate(`${currentPath==='/profile'?"/":"/profile"}`)}
+            className="rounded-lg bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-3 px-7 uppercase"
+          >
+         {currentPath==='/'?"Profile":"Home"}
+          </Button>
+        </motion.div>
+
+     </div> :<div className="items-center gap-x-6 flex justify-around">
         {/* Login Button with orange background */}
         <motion.div
           whileHover={{ scale: 1.05 }} // Lighter orange hover effect
@@ -83,7 +102,7 @@ export const Navbar = () => {
             Sign Up
           </Button>
         </motion.div>
-      </div>
+      </div>}
     </motion.nav>
   );
 };

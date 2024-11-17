@@ -29,27 +29,31 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: (
+          <ProtectedRoute authenticationRequired={false}>
           <Suspense fallback={<div className="text-center">Loading Login...</div>}>
             <Login />
           </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "register",
         element: (
+          <ProtectedRoute authenticationRequired={false}>
           <Suspense fallback={<div className="text-center">Loading Register...</div>}>
             <Register />
           </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "profile",
         element: (
+          <ProtectedRoute authenticationRequired={true}>
           <Suspense fallback={<div className="text-center">Loading Profile...</div>}>
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
+           <Profile />
           </Suspense>
+            </ProtectedRoute>
         ),
       },
     ],

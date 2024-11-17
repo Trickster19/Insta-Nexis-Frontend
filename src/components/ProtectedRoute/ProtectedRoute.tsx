@@ -3,15 +3,22 @@ import React, { useEffect } from "react"
 import { Navigate } from "react-router-dom";
 
 interface Props{
-    children:React.Component
+    children: React.ReactNode
+    authenticationRequired:Boolean
 }
-export const ProtectedRoute=({children}:Props)=>{
+export const ProtectedRoute=({children,authenticationRequired}:Props)=>{
 
      const accesstoken=useAuth(state=>state.accessToken)
 
 
-    if(accesstoken) return children;
+   
+    
+    
+    if(!authenticationRequired && accesstoken) return  <Navigate to="/" />
 
-    return <Navigate to="/" />
+    if(authenticationRequired && accesstoken===null) return  <Navigate to="/login" />
+
+return <>{children}</>
+    
 
 }
