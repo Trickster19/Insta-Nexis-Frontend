@@ -47,7 +47,7 @@ export const HeroParallax = ({
     <>
       <div
         ref={ref}
-        className="h-[130vh]  overflow-hidden antialiased relative flex flex-col self-auto [perspective:700px] [transform-style:preserve-3d]"
+        className="h-[100vh]  md:h-[130vh]  overflow-hidden antialiased relative flex flex-col self-auto [perspective:700px] [transform-style:preserve-3d]"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-blue-400 via-white to-orange-100 opacity-30 z-1"></div>
 
