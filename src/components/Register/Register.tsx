@@ -242,6 +242,18 @@ export const Register = () => {
             </form>
           )}
         </Form>
+        {/* Terms and Conditions */}
+        <div className="text-sm text-center text-gray-500 mt-6">
+          By continuing, you agree to our{" "}
+          <a href="#" className="text-[#ff7c00] hover:text-[#e65100] underline">
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a href="#" className="text-[#ff7c00] hover:text-[#e65100] underline">
+            Privacy Policy
+          </a>
+          .
+        </div>
       </motion.div>
     </>
   );
