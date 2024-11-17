@@ -1,8 +1,9 @@
-import { registrationSchema } from "@/utils/FormSchemas" // Import registration schema
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,200 +11,238 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription, // Import FormDescription
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useState } from "react"
-import { motion } from "framer-motion"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { ChevronLeft, ChevronRight, HandMetal } from "lucide-react";
+import { Link } from "react-router-dom";
+
+// Validation schema for both steps
+const registrationSchemaStep1 = z.object({
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(8, "Password must be at least 8 characters long"),
+});
+
+const registrationSchemaStep2 = z.object({
+  name: z.string().min(1, "Name is required"),
+  companyName: z.string().optional(),
+  email: z.string().email("Invalid email address"),
+});
+
+type Step1FormValues = z.infer<typeof registrationSchemaStep1>;
+type Step2FormValues = z.infer<typeof registrationSchemaStep2>;
 
 export const Register = () => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [currentStep, setCurrentStep] = useState(1); // Track current step
 
-  const form = useForm<z.infer<typeof registrationSchema>>({
-    resolver: zodResolver(registrationSchema),
-    defaultValues: {
-      name: "",
-      companyName: "",
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-  })
+  // Step 1 form
+  const step1Form = useForm<Step1FormValues>({
+    resolver: zodResolver(registrationSchemaStep1),
+    defaultValues: { username: "", password: "" },
+  });
 
-  const onSubmit = (data: z.infer<typeof registrationSchema>) => {
-    console.log(data)
-  }
+  // Step 2 form
+  const step2Form = useForm<Step2FormValues>({
+    resolver: zodResolver(registrationSchemaStep2),
+    defaultValues: { name: "", companyName: "", email: "" },
+  });
+
+  // Submit handlers
+  const handleStep1Submit = (data: Step1FormValues) => {
+    console.log("Step 1 Data: ", data);
+    setCurrentStep(2); // Move to step 2
+  };
+
+  const handleStep2Submit = (data: Step2FormValues) => {
+    console.log("Step 2 Data: ", data);
+    // Combine data from both steps and submit
+    console.log("Combined Data: ", {
+      ...step1Form.getValues(),
+      ...data,
+    });
+  };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#e3e4de]   py-24">
-      {/* Form Card with Dark Blue Background and Animation */}
+    <>
+      {/* Top-right Login Link */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.01, ease: "easeOut" }}
+        className="absolute top-4 right-4 text-sm"
+      >
+        <Link
+          to="/login"
+          className="no-underline uppercase flex items-center text-sm text-[#ff7c00] hover:text-[#e65100] font-semibold"
+        >
+          Login
+          <ChevronRight size={17} />
+        </Link>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-2xl bg-[#0f2a54] p-6 pt-10 pb-8 rounded-lg shadow-xl border border-gray-200"
+        className="w-full min-h-[500px] mx-auto p-6"
       >
-        {/* Register Heading */}
-        <h2 className="text-white text-3xl font-semibold text-center mb-4">Register</h2>
+        <Form {...(currentStep === 1 ? step1Form : step2Form)}>
+          {currentStep === 1 && (
+            <form
+              onSubmit={step1Form.handleSubmit(handleStep1Submit)}
+              className="space-y-6"
+            >
+              <h2 className="text-center text-2xl font-semibold text-[#0f2a54] mb-4">
+                Step 1: Login Details
+              </h2>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className=" pt-8 space-y-1">
-            {/* Name Field */}
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="pt-4">
-                  <FormLabel className="text-white font-semibold text-xl">Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your name"
-                      {...field}
-                      className="p-3 rounded-lg bg-white border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-gray-300 mt-1">
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              {/* Username Field */}
+              <FormField
+                control={step1Form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[#0f2a54] font-medium">
+                      Username
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your username"
+                        {...field}
+                        className="w-full p-5 rounded-sm bg-white border border-gray-300 focus:ring-2 focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            {/* Company Name Field */}
-            <FormField
-              control={form.control}
-              name="companyName"
-              render={({ field }) => (
-                <FormItem className="pt-4">
-                  <FormLabel className="text-white font-semibold text-xl">Company Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your company name"
-                      {...field}
-                      className="p-3 rounded-lg bg-white border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-gray-300 mt-1">
-                    The name of the company you're representing.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Username Field */}
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem className="pt-4">
-                  <FormLabel className="text-white font-semibold text-xl">Username</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your username"
-                      {...field}
-                      className="p-3 rounded-lg bg-white border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-gray-300 mt-1">
-                    Your instagram username for logging in.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Email Field */}
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="pt-4">
-                  <FormLabel className="text-white font-semibold text-xl">Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter your email"
-                      {...field}
-                      className="p-3 rounded-lg bg-white border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
-                    />
-                  </FormControl>
-                  <FormDescription className="text-sm text-gray-300 mt-1">
-                    We'll use this email for account recovery.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Password Field */}
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem className="pb-4">
-                  <FormLabel className="text-white font-semibold text-xl">Password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
+              {/* Password Field */}
+              <FormField
+                control={step1Form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[#0f2a54] font-medium">
+                      Password
+                    </FormLabel>
+                    <FormControl>
                       <Input
                         placeholder="Enter your password"
                         {...field}
-                        type={showPassword ? "text" : "password"}
-                        className="p-3 bg-white rounded-lg border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
+                        type="password"
+                        className="w-full p-5 rounded-sm bg-white border border-gray-300 focus:ring-2 focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
                       />
-                      <Button
-                        variant={"ghost"}
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-sm"
-                      >
-                        {showPassword ? "Hide" : "Show"}
-                      </Button>
-                    </div>
-                  </FormControl>
-                  <FormDescription className="text-sm text-gray-300 mt-1">
-                    Choose a strong password for your account.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            {/* Confirm Password Field */}
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem className="pb-4">
-                  <FormLabel className="text-white font-semibold text-xl">Confirm Password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        placeholder="Confirm your password"
-                        {...field}
-                        type={showPassword ? "text" : "password"}
-                        className="p-3 bg-white rounded-lg border border-gray-300 shadow-sm focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
-                      />
-                    </div>
-                  </FormControl>
-                  <FormDescription className="text-sm text-gray-300 mt-1">
-                    Confirm the password you entered above.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              {/* Next Step Button */}
+              <div className="pt-8">
+                <Button
+                  type="submit"
+                  className="w-full py-6 bg-[#ff7c00] text-white font-semibold rounded-md hover:bg-[#e65100] focus:ring-2 focus:ring-[#ff7c00] focus:ring-offset-2"
+                >
+                  Next Step
+                </Button>
+              </div>
+            </form>
+          )}
 
-            {/* Submit Button with Margin */}
-            <Button
-              type="submit"
-              className="w-full p-4 mt-4  bg-[#ff7c00] text-white font-semibold rounded-lg shadow-md hover:bg-[#e65100] focus:ring-2 focus:ring-[#ff7c00] focus:ring-offset-2"
+          {currentStep === 2 && (
+            <form
+              onSubmit={step2Form.handleSubmit(handleStep2Submit)}
+              className="space-y-6"
             >
-              Register
-            </Button>
-          </form>
+              <h2 className="text-center text-2xl font-semibold text-[#0f2a54] mb-4">
+                Step 2: Additional Details
+              </h2>
+
+              {/* Name Field */}
+              <FormField
+                control={step2Form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[#0f2a54] font-medium">
+                      Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your name"
+                        {...field}
+                        className="w-full p-5 rounded-sm bg-white border border-gray-300 focus:ring-2 focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Company Name Field */}
+              <FormField
+                control={step2Form.control}
+                name="companyName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[#0f2a54] font-medium">
+                      Company Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your company name"
+                        {...field}
+                        className="w-full p-5 rounded-sm bg-white border border-gray-300 focus:ring-2 focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Email Field */}
+              <FormField
+                control={step2Form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-[#0f2a54] font-medium">
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your email"
+                        {...field}
+                        className="w-full p-5 rounded-sm bg-white border border-gray-300 focus:ring-2 focus:ring-[#ff7c00] focus:border-[#ff7c00] text-[#0f2a54]"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Navigation Buttons */}
+              <div className="flex justify-between">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={() => setCurrentStep(1)}
+                  className="flex items-center gap-2"
+                >
+                  <ChevronLeft size={18} />
+                  Back
+                </Button>
+                <Button
+                  type="submit"
+                  className="py-4 w-48 bg-[#ff7c00] text-white font-semibold rounded-sm hover:bg-[#e65100]"
+                >
+                  Submit
+                  <HandMetal size={40} />
+                </Button>
+              </div>
+            </form>
+          )}
         </Form>
       </motion.div>
-    </div>
-  )
-}
+    </>
+  );
+};
