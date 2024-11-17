@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import useAuth from "@/store";
 
 export const Navbar = () => {
@@ -23,22 +24,17 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Compute background opacity based on scroll position
-  const scrollOpacity = Math.min(scrollY / 300, 0.8); // Increase opacity as scroll value increases
-
   // Background color changes based on scroll value
-  const bgColor = scrollY > 0 ? "#0f2954e2" : "transparent";
-  const backBlur = scrollY > 0 ? true : false;
+  const bgColor = scrollY > 0 ? "#ffffffa2" : "transparent";
 
   return (
     <motion.nav
       className={cn(
         "px-6 py-4 w-full flex items-center justify-between transition-all duration-300 ease-in-out",
-        "fixed top-0 left-0 right-0 z-50 "
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b-2"
       )}
       style={{
         backgroundColor: bgColor, // Set background color based on scroll position
-        backdropFilter: backBlur ? "blur(5px)" : "blur(0px)",
       }}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -47,10 +43,9 @@ export const Navbar = () => {
       <div className="flex items-center gap-x-4">
         {/* Logo with sharp text, gradient, and shadow */}
         <motion.span
-          className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ff7e5f] via-[#feb47b] to-[#0f2954e6] uppercase drop-shadow-[0px_4px_6px_rgba(0,0,0,0.2)]"
+          className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ff7e5f] via-[#feb47b] to-[#0f2954e6] uppercase drop-shadow-[0px_4px_6px_rgba(0,0,0,0.2)]"
           whileHover={{
             scale: 1.1,
-            textShadow: "0px 0px 15px rgba(255, 255, 255, 0.7)",
           }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 200 }}
@@ -83,13 +78,13 @@ export const Navbar = () => {
         >
           <Button
             onClick={() => navigate("/login")}
-            className="rounded-lg bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-3 px-7 uppercase"
+            className="rounded-sm bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-5 px-8 uppercase"
           >
             Login
+            <ArrowRight size={40} />
           </Button>
         </motion.div>
-
-        {/* Sign Up Button with orange background */}
+      
         <motion.div
           whileHover={{ scale: 1.05 }} // Lighter orange hover effect
           whileTap={{ scale: 0.95 }}
@@ -97,10 +92,11 @@ export const Navbar = () => {
         >
           <Button
             onClick={() => navigate("/register")}
-            className="rounded-lg bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-3 px-7 uppercase"
+            className="rounded-sm bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-5 px-8 uppercase"
           >
             Sign Up
-          </Button>
+            <ArrowRight size={40} />
+            </Button>
         </motion.div>
       </div>}
     </motion.nav>

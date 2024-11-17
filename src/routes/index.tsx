@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
-import  Layout  from "@/components/Layout";
-import ProtectedRoute  from "@/components/ProtectedRoute";
+import Layout from "@/components/Layout";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Lazy load components
 const Home = lazy(() => import("@/components/Home"));
@@ -21,7 +21,9 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<div className="text-center">Loading Home...</div>}>
+          <Suspense
+            fallback={<div className="text-center">Loading Home...</div>}
+          >
             <Home />
           </Suspense>
         ),
@@ -54,6 +56,31 @@ export const router = createBrowserRouter([
            <Profile />
           </Suspense>
             </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/",
+    children: [
+      {
+        path: "login",
+        element: (
+          <Suspense
+            fallback={<div className="text-center">Loading Login...</div>}
+          >
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <Suspense
+            fallback={<div className="text-center">Loading Register...</div>}
+          >
+            <Register />
+          </Suspense>
         ),
       },
     ],
