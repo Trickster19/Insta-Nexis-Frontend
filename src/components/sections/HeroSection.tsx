@@ -4,8 +4,10 @@ import { ChevronRight } from "lucide-react";
 import BackgroundImage from "@/assets/hero.svg"; // Update the path based on your project structure
 import Typewriter from "typewriter-effect";
 import { HeroParallax } from "@/components/ui/hero-parallex";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const products = [
     {
       title: "Moonbeam",
@@ -137,7 +139,10 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
               className="mt-8 flex justify-center"
             >
-              <button className="relative group overflow-hidden bg-[#0f2a54] text-white uppercase px-8 py-4 text-xl flex items-center shadow-lg transition-transform duration-300 hover:rotate-3 hover:translate-y-1">
+              <button
+                onClick={() => navigate("/login")}
+                className="relative group overflow-hidden bg-[#0f2a54] text-white uppercase px-8 py-4 text-xl flex items-center shadow-lg transition-transform duration-300 hover:rotate-3 hover:translate-y-1"
+              >
                 <span
                   className="absolute inset-0 bg-gradient-to-r from-[#047aa3] via-[#0461cb] to-[#ff8d3b] bg-[length:200%_200%] group-hover:animate-gradient-shift"
                   style={{
