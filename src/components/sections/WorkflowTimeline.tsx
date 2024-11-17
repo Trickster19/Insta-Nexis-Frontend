@@ -5,8 +5,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { User, Tag, Code, Image, Truck, RefreshCcw } from "lucide-react";
-import { animate, motion, useAnimation } from "framer-motion";
-import { div } from "framer-motion/client";
+import { motion, useAnimation } from "framer-motion";
 
 // Timeline data
 const timelineSteps = [
