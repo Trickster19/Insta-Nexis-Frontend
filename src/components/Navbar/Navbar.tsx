@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { TitleName } from "../ui/title";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -36,19 +37,7 @@ export const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
     >
-      <div className="flex items-center gap-x-4">
-        {/* Logo with sharp text, gradient, and shadow */}
-        <motion.span
-          className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ff7e5f] via-[#feb47b] to-[#0f2954e6] uppercase drop-shadow-[0px_4px_6px_rgba(0,0,0,0.2)]"
-          whileHover={{
-            scale: 1.1,
-          }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 200 }}
-        >
-          Insta Nexis
-        </motion.span>
-      </div>
+      <TitleName />
 
       <div className="items-center gap-x-6 flex justify-around">
         {/* Login Button with orange background */}

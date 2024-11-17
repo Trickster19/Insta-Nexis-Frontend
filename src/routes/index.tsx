@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 import Layout from "@/components/Layout";
+import AuthLayout from "@/components/Layout/Auth";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 // Lazy load components
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/",
+    element: <AuthLayout />,
     children: [
       {
         path: "login",
