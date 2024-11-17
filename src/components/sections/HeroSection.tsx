@@ -5,6 +5,7 @@ import BackgroundImage from "@/assets/hero.svg"; // Update the path based on you
 import Typewriter from "typewriter-effect";
 import { HeroParallax } from "@/components/ui/hero-parallex";
 import { useNavigate } from "react-router-dom";
+import useAuth from "@/store";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -103,6 +104,7 @@ const HeroSection = () => {
         "https://aceternity.com/images/products/thumbnails/new/efreeinvoice.png",
     },
   ];
+  const accessToken=useAuth(state=>state.accessToken)
   return (
     <HeroParallax
       products={products}
@@ -133,7 +135,7 @@ const HeroSection = () => {
               Empowering professionals like you to achieve your dreams. Let’s
               begin a new chapter, together.
             </p>
-            <motion.div
+           { !accessToken && <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
@@ -154,7 +156,7 @@ const HeroSection = () => {
                   <ChevronRight className="ml-3" size={24} />
                 </span>
               </button>
-            </motion.div>
+            </motion.div>}
           </div>
 
           <motion.div
