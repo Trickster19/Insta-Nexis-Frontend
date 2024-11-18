@@ -36,7 +36,7 @@ export const HeroParallax = ({
     springConfig
   );
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
+    useTransform(scrollYProgress, [0, 0.7], [0.7, 1]),
     springConfig
   );
   const rotateZ = useSpring(
@@ -49,7 +49,7 @@ export const HeroParallax = ({
         ref={ref}
         className="h-[100vh]  md:h-[130vh]  overflow-hidden antialiased relative flex flex-col self-auto [perspective:700px] [transform-style:preserve-3d]"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-400 via-white to-orange-100 opacity-30 z-1"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-400  via-orange-100 to-blue-100 opacity-30 z-1"></div>
 
         <Header content={content} />
         <motion.div

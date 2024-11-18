@@ -77,9 +77,9 @@ export default function WorkflowTimeline() {
   }, []);
 
   return (
-    <div className="relative w-full bg-gradient-to-br from-blue-200 via-white to-orange-100 py-20">
+    <div className="relative w-full py-20">
       {/* Parallax Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-transparent to-orange-200 opacity-70 pointer-events-none z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-transparent to-orange-200 opacity-30 pointer-events-none z-0"></div>
 
       {/* Title */}
       <h2 className="text-4xl font-bold text-center text-blue-800 mb-16 z-10 relative">
