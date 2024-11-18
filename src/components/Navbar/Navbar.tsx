@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home, UserCircle2 } from "lucide-react";
 import useAuth from "@/store";
 import { TitleName } from "../ui/title";
 
@@ -26,17 +26,15 @@ export const Navbar = () => {
   }, []);
 
   // Background color changes based on scroll value
-  const bgColor = scrollY > 0 ? "#ffffffa2" : "transparent";
+  const isScroll = scrollY > 0;
 
   return (
     <motion.nav
       className={cn(
-        "px-6 py-4 w-full flex items-center justify-between transition-all duration-300 ease-in-out",
-        "fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b-2"
+        "px-6 py-3 w-full flex items-center justify-between transition-all duration-300 ease-in-out",
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-lg",
+        `${isScroll ? "shadow-md bg-blue-100/45" : ""}`
       )}
-      style={{
-        backgroundColor: bgColor, // Set background color based on scroll position
-      }}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
@@ -49,15 +47,24 @@ export const Navbar = () => {
             whileHover={{ scale: 1.05 }} // Lighter orange hover effect
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 200 }}
+            className="flex"
           >
-            <Button
+            <a
               onClick={() =>
                 navigate(`${currentPath === "/profile" ? "/" : "/profile"}`)
               }
-              className="rounded-lg bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-3 px-7 uppercase"
+              className="rounded-full font-semibold flex gap-x-1 items-center text-[#f57c00]  hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out p-1 px-2 uppercase"
             >
-              {currentPath === "/" ? "Profile" : "Home"}
-            </Button>
+              {currentPath === "/" ? (
+                <>
+                  <UserCircle2 size={30} /> <span>Profile</span>
+                </>
+              ) : (
+                <>
+                  <Home size={30} /> <span>Home</span>
+                </>
+              )}
+            </a>
           </motion.div>
         </div>
       ) : (
