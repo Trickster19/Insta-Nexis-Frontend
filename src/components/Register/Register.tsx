@@ -15,16 +15,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { ChevronLeft, ChevronRight, HandMetal } from "lucide-react";
 import { Link } from "react-router-dom";
-import { registrationSchemaStep1, registrationSchemaStep2 } from "@/utils/FormSchemas";
+import {
+  registrationSchemaStep1,
+  registrationSchemaStep2,
+} from "@/utils/FormSchemas";
 import useAuth from "@/store";
-
 
 type Step1FormValues = z.infer<typeof registrationSchemaStep1>;
 type Step2FormValues = z.infer<typeof registrationSchemaStep2>;
 
 export const Register = () => {
   const [currentStep, setCurrentStep] = useState(1); // Track current step
-  const setAccesstoken=useAuth(state=>state.setAccessToken)
+  const setAccesstoken = useAuth((state) => state.setAccessToken);
   // Step 1 form
   const step1Form = useForm<Step1FormValues>({
     resolver: zodResolver(registrationSchemaStep1),
@@ -54,7 +56,7 @@ export const Register = () => {
     step1Form.reset();
     step2Form.reset();
     setCurrentStep(1);
-    setAccesstoken("Haaris")
+    setAccesstoken("Haaris");
   };
 
   return (
@@ -131,7 +133,7 @@ export const Register = () => {
                   </FormItem>
                 )}
               />
-               <FormField
+              <FormField
                 control={step1Form.control}
                 name="confirmPassword"
                 render={({ field }) => (

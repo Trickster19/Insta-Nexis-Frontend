@@ -1,11 +1,11 @@
-import WorkFlowTimeline from "../sections/WorkflowTimeline";
-import HeroSection from "../sections/HeroSection";
+import Hero from "../sections/Hero";
+import WorkflowTimeline from "../sections/WorkflowTimeline";
 
 export const Home = () => {
   return (
     <>
-      <HeroSection />
-      <WorkFlowTimeline />
+      <Hero />
+      <WorkflowTimeline />
     </>
   );
 };
