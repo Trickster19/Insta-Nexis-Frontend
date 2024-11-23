@@ -17,10 +17,12 @@ import { motion } from "framer-motion";
 import useAuth from "@/store";
 import { useNavigate, Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+import { useLogin } from "@/hooks/UseLogin";
 
 export const Login = () => {
-  const setaccessToken = useAuth((state) => state.setAccessToken);
-  const navigate = useNavigate();
+
+   const {mutate, isError}=useLogin()
+  
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -31,12 +33,9 @@ export const Login = () => {
 
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     console.log(data);
-    setaccessToken("Haaris");
-    form.reset({
-      username: "",
-      password: "",
-    });
-    navigate("/profile");
+   
+    mutate(data);
+    
   };
 
   return (
