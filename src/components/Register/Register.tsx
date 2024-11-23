@@ -13,14 +13,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ChevronLeft, ChevronRight, HandMetal } from "lucide-react";
+import { ChevronLeft, ChevronRight, HandMetal, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   registrationSchemaStep1,
   registrationSchemaStep2,
 } from "@/utils/FormSchemas";
-import useAuth from "@/store";
-import { UserInfo } from "@/utils/Interfaces";
 import { UseRegister } from "@/hooks/UseRegister";
 
 type Step1FormValues = z.infer<typeof registrationSchemaStep1>;
@@ -28,40 +26,33 @@ type Step2FormValues = z.infer<typeof registrationSchemaStep2>;
 
 export const Register = () => {
   const [currentStep, setCurrentStep] = useState(1); // Track current step
-  const mutation=UseRegister();
-  const setAccesstoken = useAuth((state) => state.setAccessToken);
-  // Step 1 form
+  const mutation = UseRegister();
+
   const step1Form = useForm<Step1FormValues>({
     resolver: zodResolver(registrationSchemaStep1),
-    defaultValues: { username: "", password: "",confirmPassword:"" },
+    defaultValues: { username: "", password: "", confirmPassword: "" },
   });
 
-  // Step 2 form
   const step2Form = useForm<Step2FormValues>({
     resolver: zodResolver(registrationSchemaStep2),
     defaultValues: { name: "", companyName: "", email: "" },
   });
 
-  // Submit handlers
-  const handleStep1Submit = (data: Step1FormValues) => {
-    console.log("Step 1 Data: ", data);
-    setCurrentStep(2); // Move to step 2
+  const handleStep1Submit = () => {
+    setCurrentStep(2);
   };
 
   const handleStep2Submit = (data: Step2FormValues) => {
-    console.log("Step 2 Data: ", data);
-    // Combine data from both steps and submit
     console.log("Combined Data: ", {
       ...step1Form.getValues(),
       ...data,
     });
-    const userInfo={
+    const userInfo = {
       ...step1Form.getValues(),
       ...data,
-    }
+    };
 
-     mutation.mutate(userInfo)
-    
+    mutation.mutate(userInfo);
   };
 
   return (
@@ -86,8 +77,8 @@ export const Register = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full max-w-2xl min-h-[500px] mx-auto p-6 py-0"
       >
-          {currentStep === 1 && (
-        <Form {...step1Form}>
+        {currentStep === 1 && (
+          <Form {...step1Form}>
             <form
               onSubmit={step1Form.handleSubmit(handleStep1Submit)}
               className="space-y-6"
@@ -169,12 +160,11 @@ export const Register = () => {
                 </Button>
               </div>
             </form>
-        </Form>
+          </Form>
+        )}
 
-          )}
-
-          {currentStep === 2 && (
-            <Form {...step2Form}>
+        {currentStep === 2 && (
+          <Form {...step2Form}>
             <form
               onSubmit={step2Form.handleSubmit(handleStep2Submit)}
               className="space-y-6"
@@ -222,7 +212,6 @@ export const Register = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                  
                 )}
               />
 
@@ -248,27 +237,32 @@ export const Register = () => {
               />
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between">
+              <div className="flex justify-between pt-7">
                 <Button
                   type="button"
                   variant="ghost"
                   onClick={() => setCurrentStep(1)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 py-6"
                 >
                   <ChevronLeft size={18} />
                   Back
                 </Button>
                 <Button
                   type="submit"
-                  className="py-4 w-48 bg-[#ff7c00] text-white font-semibold rounded-sm hover:bg-[#e65100]"
+                  className="py-6 w-48 bg-[#ff7c00] text-white font-semibold rounded-sm hover:bg-[#e65100]"
+                  disabled={mutation.isLoading}
                 >
-                  Submit
-                  <HandMetal size={40} />
+                  {mutation.isLoading ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <HandMetal size={40} />
+                  )}
+                  Register Me
                 </Button>
               </div>
             </form>
-            </Form>
-          )}
+          </Form>
+        )}
         {/* Terms and Conditions */}
         <div className="text-sm text-center text-gray-500 mt-6">
           By continuing, you agree to our{" "}

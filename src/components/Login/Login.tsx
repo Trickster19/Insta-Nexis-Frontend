@@ -14,15 +14,13 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { motion } from "framer-motion";
-import useAuth from "@/store";
-import { useNavigate, Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ChevronRight, Loader2 } from "lucide-react";
 import { useLogin } from "@/hooks/UseLogin";
 
 export const Login = () => {
+  const mutation = useLogin();
 
-   const mutation=useLogin()
-  
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -32,10 +30,7 @@ export const Login = () => {
   });
 
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
-   
     mutation.mutate(data);
-    
   };
 
   return (
@@ -120,7 +115,9 @@ export const Login = () => {
               <Button
                 type="submit"
                 className="flex w-full py-6 bg-[#ff7c00] text-white font-semibold rounded-md hover:bg-[#e65100] focus:ring-2 focus:ring-[#ff7c00] focus:ring-offset-2 transition-transform transform hover:scale-105"
+                disabled={mutation.isLoading}
               >
+                {mutation.isLoading && <Loader2 className="animate-spin" />}
                 Submit
               </Button>
             </div>
