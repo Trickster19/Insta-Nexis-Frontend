@@ -22,3 +22,10 @@ export interface Product {
     username:string,
     password:string
   }
+  export interface UserInfo {
+    username: string;
+    email: string;
+    password: string;
+    name: string;
+    companyName: string;
+  }

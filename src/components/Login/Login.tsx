@@ -21,7 +21,7 @@ import { useLogin } from "@/hooks/UseLogin";
 
 export const Login = () => {
 
-   const {mutate, isError}=useLogin()
+   const mutation=useLogin()
   
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -34,7 +34,7 @@ export const Login = () => {
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
     console.log(data);
    
-    mutate(data);
+    mutation.mutate(data);
     
   };
 

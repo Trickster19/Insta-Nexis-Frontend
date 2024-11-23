@@ -20,12 +20,15 @@ import {
   registrationSchemaStep2,
 } from "@/utils/FormSchemas";
 import useAuth from "@/store";
+import { UserInfo } from "@/utils/Interfaces";
+import { UseRegister } from "@/hooks/UseRegister";
 
 type Step1FormValues = z.infer<typeof registrationSchemaStep1>;
 type Step2FormValues = z.infer<typeof registrationSchemaStep2>;
 
 export const Register = () => {
   const [currentStep, setCurrentStep] = useState(1); // Track current step
+  const mutation=UseRegister();
   const setAccesstoken = useAuth((state) => state.setAccessToken);
   // Step 1 form
   const step1Form = useForm<Step1FormValues>({
@@ -52,11 +55,13 @@ export const Register = () => {
       ...step1Form.getValues(),
       ...data,
     });
+    const userInfo={
+      ...step1Form.getValues(),
+      ...data,
+    }
 
-    step1Form.reset();
-    step2Form.reset();
-    setCurrentStep(1);
-    setAccesstoken("Haaris");
+     mutation.mutate(userInfo)
+    
   };
 
   return (
