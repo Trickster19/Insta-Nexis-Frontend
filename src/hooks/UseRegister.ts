@@ -1,37 +1,25 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import {  UserInfo } from '@/utils/Interfaces';
+import { UserInfo } from "@/utils/Interfaces";
 
-import registerApi from '@/api/registerApi';
+import registerApi from "@/api/registerApi";
 // Define the type of the decoded JWT token
 
 // Function to handle the login request
 
-
 export const UseRegister = () => {
   const navigate = useNavigate();
 
-
   const mutation = useMutation({
-
-    mutationFn: (credentials:UserInfo)=> registerApi(credentials),
+    mutationFn: (credentials: UserInfo) => registerApi(credentials),
     onSuccess: (success: boolean) => {
-    
-        
-       
-        console.log("registration success")
-      if(success) navigate('/login');
-    
-
-       
+      console.log("registration success", success);
+      if (success) navigate("/login");
     },
     onError: (error: Error) => {
-     
-
-      console.error('registration failed:', error.message);
-      
+      console.error("registration failed:", error.message);
     },
   });
 
