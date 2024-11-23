@@ -14,9 +14,17 @@ export const Profile = () => {
     <>
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-400 via-orange-100 to-blue-100 opacity-70 -z-10"></div>
       <div className="p-6 mt-20 h-[80vh] relative">
-        {isError ? (
+        {isLoading ? (
+          <div className="flex h-full items-center justify-center ">
+            <Loader2
+              className="w-28 h-28 animate-spin "
+              style={{
+                color: "#f57c00",
+              }}
+            />
+          </div>
+        ) : isError ? (
           <div className="h-full flex flex-col justify-center items-center">
-            {/* Error Image */}
             <img
               src={ServerDownSvg}
               alt="Server Down"
@@ -25,15 +33,6 @@ export const Profile = () => {
             <p className="text-xl font-semibold text-orange-800">
               Oops! Error Occurred
             </p>
-          </div>
-        ) : isLoading ? (
-          <div className="flex h-screen items-center justify-center ">
-            <Loader2
-              className=" w-28 h-28 animate-spin "
-              style={{
-                color: "#f57c00",
-              }}
-            />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
