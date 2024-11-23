@@ -6,11 +6,13 @@ import { motion } from "framer-motion";
 import { ArrowRight, Home, UserCircle2 } from "lucide-react";
 import useAuth from "@/store";
 import { TitleName } from "../ui/title";
+import { toast } from "sonner";
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0); // Track scroll value
   const accesstoken = useAuth((state) => state.accessToken);
+  const setAccessToken = useAuth((state) => state.setAccessToken);
   const location = useLocation();
   const currentPath = location.pathname;
   console.log("**URL", currentPath);
@@ -66,6 +68,23 @@ export const Navbar = () => {
               )}
             </a>
           </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }} // Lighter orange hover effect
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 200 }}
+          >
+            <Button
+              onClick={() => {
+                setAccessToken(null);
+                toast.success("User Login Out Successful");
+                navigate("/");
+              }}
+              className="rounded-sm bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-5 px-8 uppercase"
+            >
+              Log Out
+              <ArrowRight size={40} />
+            </Button>
+          </motion.div>
         </div>
       ) : (
         <div className="items-center gap-x-6 flex justify-around">
@@ -83,20 +102,6 @@ export const Navbar = () => {
               <ArrowRight size={40} />
             </Button>
           </motion.div>
-
-          {/* <motion.div
-            whileHover={{ scale: 1.05 }} // Lighter orange hover effect
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <Button
-              onClick={() => navigate("/register")}
-              className="rounded-sm bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-5 px-8 uppercase"
-            >
-              Sign Up
-              <ArrowRight size={40} />
-            </Button>
-          </motion.div> */}
         </div>
       )}
     </motion.nav>

@@ -1,12 +1,24 @@
-import {api} from "./api";
+import { api } from "./api";
 
+const fetchAllProducts = async (
+  username: string,
+  accessToken: string | null
+) => {
+  try {
+    const { data } = await api.get(`/api/userProducts/${username}`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
 
-const fetchAllProducts= async(username:string)=>{
+    return data.data;
+  } catch (err: any) {
+    if (err?.response.status === 500) {
+      return new Error(err.response.message || "Internal Server Error");
+    }
 
+    return new Error(err.response.message || "Unexpected Error");
+  }
+};
 
-    const {data}= await api.get(`/api/userProducts/${username}`);
-        
-    return data
-}
-
-export {fetchAllProducts}
+export { fetchAllProducts };

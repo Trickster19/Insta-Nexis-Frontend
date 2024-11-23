@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { DecodedJWT, loginInterface } from "@/utils/Interfaces";
 import { jwtDecode } from "jwt-decode";
 import useAuth from "@/store";
-import loginApi from "@/api/LoginApi";
+import loginApi from "@/api/loginApi";
 import { toast } from "sonner";
 // Define the type of the decoded JWT token
 

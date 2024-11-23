@@ -1,10 +1,12 @@
 import { fetchAllProducts } from "@/api";
+import useAuth from "@/store";
 import { useQuery } from "@tanstack/react-query";
 
-const UseProducts = (userName: string, setter: () => void) => {
-  const {response = useQuery({
+const UseProducts = (userName: string) => {
+  const accessToken = useAuth((state) => state.accessToken);
+  const response = useQuery({
     queryKey: ["products", userName],
-    queryFn: () => fetchAllProducts(userName),
+    queryFn: () => fetchAllProducts(userName, accessToken),
   });
 
   return response;

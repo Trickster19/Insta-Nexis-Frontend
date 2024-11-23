@@ -3,6 +3,7 @@ import React, { Suspense, lazy } from "react";
 import Layout from "@/components/Layout";
 import AuthLayout from "@/components/Layout/Auth";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import { Loader2, LoaderPinwheel } from "lucide-react";
 
 // Lazy load components
 const Home = lazy(() => import("@/components/Home"));
@@ -14,7 +15,19 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<div className="text-center">Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="flex h-screen items-center justify-center ">
+            <Loader2
+              className=" w-28 h-28 animate-spin "
+              style={{
+                color: "#f57c00",
+              }}
+            />
+          </div>
+        }
+      >
+        {" "}
         <Layout />
       </Suspense>
     ),
@@ -23,7 +36,16 @@ export const router = createBrowserRouter([
         index: true,
         element: (
           <Suspense
-            fallback={<div className="text-center">Loading Home...</div>}
+            fallback={
+              <div className="flex h-screen items-center justify-center ">
+                <Loader2
+                  className=" w-28 h-28 animate-spin "
+                  style={{
+                    color: "#f57c00",
+                  }}
+                />
+              </div>
+            }
           >
             <Home />
           </Suspense>
@@ -34,7 +56,16 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute authenticationRequired={true}>
             <Suspense
-              fallback={<div className="text-center">Loading Profile...</div>}
+              fallback={
+                <div className="flex h-screen items-center justify-center ">
+                  <Loader2
+                    className=" w-28 h-28 animate-spin "
+                    style={{
+                      color: "#f57c00",
+                    }}
+                  />
+                </div>
+              }
             >
               <Profile />
             </Suspense>
@@ -46,7 +77,16 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute authenticationRequired={true}>
             <Suspense
-              fallback={<div className="text-center">Loading Product...</div>}
+              fallback={
+                <div className="flex h-screen items-center justify-center ">
+                  <Loader2
+                    className=" w-28 h-28 animate-spin "
+                    style={{
+                      color: "#f57c00",
+                    }}
+                  />
+                </div>
+              }
             >
               <Product />
             </Suspense>
@@ -64,7 +104,16 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute authenticationRequired={false}>
             <Suspense
-              fallback={<div className="text-center">Loading Login...</div>}
+              fallback={
+                <div className="flex h-screen items-center justify-center ">
+                  <Loader2
+                    className=" w-28 h-28 animate-spin "
+                    style={{
+                      color: "#f57c00",
+                    }}
+                  />
+                </div>
+              }
             >
               <Login />
             </Suspense>
@@ -76,7 +125,16 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute authenticationRequired={false}>
             <Suspense
-              fallback={<div className="text-center">Loading Register...</div>}
+              fallback={
+                <div className="flex h-screen items-center justify-center ">
+                  <Loader2
+                    className=" w-28 h-28 animate-spin "
+                    style={{
+                      color: "#f57c00",
+                    }}
+                  />
+                </div>
+              }
             >
               <Register />
             </Suspense>
