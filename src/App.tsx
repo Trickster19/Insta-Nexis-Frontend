@@ -2,6 +2,7 @@ import { RouterProvider } from "react-router-dom";
 import "./App.css";
 // import useStore from "@/store";
 import { router } from "./routes";
+import { Toaster } from "sonner";
 
 // interface CountState {
 //   count: number;
@@ -10,6 +11,7 @@ import { router } from "./routes";
 function App() {
   return (
     <>
+      <Toaster richColors position="bottom-center" />
       <RouterProvider router={router} />
     </>
   );
