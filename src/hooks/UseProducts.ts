@@ -6,7 +6,7 @@ const UseProducts = (userName: string) => {
   const accessToken = useAuth((state) => state.accessToken);
   const response = useQuery({
     queryKey: ["products", userName],
-    queryFn: () => fetchAllProducts(userName, accessToken),
+    queryFn: () => fetchAllProducts(accessToken),
   });
 
   return response;

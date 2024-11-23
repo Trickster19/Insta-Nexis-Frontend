@@ -1,11 +1,8 @@
 import { api } from "./api";
 
-const fetchAllProducts = async (
-  username: string,
-  accessToken: string | null
-) => {
+const fetchAllProducts = async (accessToken: string | null) => {
   try {
-    const { data } = await api.get(`/api/userProducts/${username}`, {
+    const { data } = await api.get(`/api/userProducts`, {
       headers: {
         Authorization: accessToken,
       },
