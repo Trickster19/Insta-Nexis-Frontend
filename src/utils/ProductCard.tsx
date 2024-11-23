@@ -7,7 +7,7 @@ type ProductCardProps = {
   image: string;
   name: string;
   company: string;
-  price: string;
+  price: Number;
   description: string;
   productId: string; // Assuming you have a productId to use for the URL
 };

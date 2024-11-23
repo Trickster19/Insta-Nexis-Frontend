@@ -2,9 +2,11 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from 'zustand/middleware'
 interface TokenState {
   accessToken: string | null;
-  isAuth:Boolean;
+  isAuth:boolean;
+  userName:string;
   setAccessToken: (accessToken: string) => void;
-  setIsAuth : (isAuth:Boolean)=>void;
+  setIsAuth : (isAuth:boolean)=>void;
+  setUserName:(useName:string)=>void;
 
 }
 
@@ -14,12 +16,16 @@ export const useAuth = create<TokenState>()(
         (set) => ({
             accessToken: null,
             isAuth:false,
+            userName:"",
             setIsAuth:(isAuth)=>{
                    set({isAuth});
             },
             setAccessToken: (accessToken) => {
-              set({ accessToken }); // Update the state with the new accessToken
+              set({ accessToken }); 
             },
+            setUserName:(userName)=>{
+                set({userName});
+            }
           
             
           }),

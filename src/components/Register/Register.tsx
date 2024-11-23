@@ -30,7 +30,7 @@ export const Register = () => {
   // Step 1 form
   const step1Form = useForm<Step1FormValues>({
     resolver: zodResolver(registrationSchemaStep1),
-    defaultValues: { username: "", password: "" },
+    defaultValues: { username: "", password: "",confirmPassword:"" },
   });
 
   // Step 2 form
@@ -81,8 +81,8 @@ export const Register = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full max-w-2xl min-h-[500px] mx-auto p-6 py-0"
       >
-        <Form {...(currentStep === 1 ? step1Form : step2Form)}>
           {currentStep === 1 && (
+        <Form {...step1Form}>
             <form
               onSubmit={step1Form.handleSubmit(handleStep1Submit)}
               className="space-y-6"
@@ -164,9 +164,12 @@ export const Register = () => {
                 </Button>
               </div>
             </form>
+        </Form>
+
           )}
 
           {currentStep === 2 && (
+            <Form {...step2Form}>
             <form
               onSubmit={step2Form.handleSubmit(handleStep2Submit)}
               className="space-y-6"
@@ -214,6 +217,7 @@ export const Register = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
+                  
                 )}
               />
 
@@ -258,8 +262,8 @@ export const Register = () => {
                 </Button>
               </div>
             </form>
+            </Form>
           )}
-        </Form>
         {/* Terms and Conditions */}
         <div className="text-sm text-center text-gray-500 mt-6">
           By continuing, you agree to our{" "}
