@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Home, Target, User2, UserCircle2 } from "lucide-react";
+import { ArrowRight, Home, Target, User2 } from "lucide-react";
 import useAuth from "@/store";
 import { TitleName } from "../ui/title";
 import { toast } from "sonner";

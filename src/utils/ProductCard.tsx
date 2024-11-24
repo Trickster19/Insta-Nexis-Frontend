@@ -25,7 +25,7 @@ export const ProductCard: FC<Product> = ({
         transition={{ duration: 0.3 }}
       >
         {/* Two-Column Layout */}
-        <div className="grid gap-y-2 p-3 h-full">
+        <div className="grid gap-y-0.5 p-3 h-full">
           {/* Image Section */}
           <div className="relative w-full h-60 overflow-hidden rounded-t-lg shadow-lg bg-gray-200">
             <img
