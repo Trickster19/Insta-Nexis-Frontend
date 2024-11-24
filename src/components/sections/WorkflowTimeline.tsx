@@ -78,9 +78,6 @@ export default function WorkflowTimeline() {
 
   return (
     <div className="relative w-full py-20">
-      {/* Parallax Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-transparent to-orange-200 opacity-30 pointer-events-none z-0"></div>
-
       {/* Title */}
       <h2 className="text-4xl font-bold text-center text-blue-800 mb-16 z-10 relative">
         Workflow Of Our Solution

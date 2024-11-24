@@ -4,6 +4,7 @@ import { Product } from "@/utils/Interfaces";
 import { ProductCard } from "@/utils/ProductCard";
 import { Loader2 } from "lucide-react";
 import ServerDownSvg from "@/assets/server_down.svg";
+import NoDataSvg from "@/assets/no_data.svg";
 import { toast } from "sonner";
 
 export const Profile = () => {
@@ -12,7 +13,6 @@ export const Profile = () => {
   if (isError) toast.error("Please Refresh The Page");
   return (
     <>
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-400 via-orange-100 to-blue-100 opacity-70 -z-10"></div>
       <div className="p-6 mt-20 h-[80vh] relative">
         {isLoading ? (
           <div className="flex h-full items-center justify-center ">
@@ -30,8 +30,19 @@ export const Profile = () => {
               alt="Server Down"
               className="w-1/2 max-w-md my-4"
             />
-            <p className="text-xl font-semibold text-orange-800">
+            <p className="text-2xl font-semibold text-orange-600">
               Oops! Error Occurred
+            </p>
+          </div>
+        ) : data.length === 0 ? (
+          <div className="h-full flex flex-col justify-center items-center">
+            <img
+              src={NoDataSvg}
+              alt="Server Down"
+              className="w-1/2 max-w-md my-4"
+            />
+            <p className="text-2xl font-semibold text-orange-600">
+              No Products Added Yet !!
             </p>
           </div>
         ) : (

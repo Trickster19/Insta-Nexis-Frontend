@@ -18,7 +18,7 @@ const Hero = () => {
   };
 
   return (
-    <main className="h-[100vh] py-20 px-12 w-full overflow-hidden antialiased relative grid grid-cols-1 md:grid-cols-2 gap-4 bg-gradient-to-b from-blue-300 via-slate-100 to-white">
+    <main className="h-[100vh] py-20 px-12 w-full overflow-hidden antialiased relative grid grid-cols-1 md:grid-cols-2 gap-4 ">
       <div className="flex flex-col text-center h-full items-center justify-center col-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -26,7 +26,7 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="mb-6"
         >
-          <h1 className="h-30 text-5xl md:text-6xl font-extrabold text-[#ff8d3b] drop-shadow-lg uppercase mb-4 leading-tight">
+          <h1 className="h-32 text-5xl md:text-6xl font-extrabold text-[#ff8d3b] drop-shadow-lg uppercase mb-4 leading-tight">
             <Typewriter
               options={{
                 strings: [

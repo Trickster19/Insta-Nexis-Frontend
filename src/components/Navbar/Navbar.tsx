@@ -34,12 +34,12 @@ export const Navbar = () => {
     <motion.nav
       className={cn(
         "px-6 py-3 w-full flex items-center justify-between transition-all duration-300 ease-in-out",
-        "fixed top-0 left-0 right-0 z-50 backdrop-blur-lg",
-        `${isScroll ? "shadow-md bg-blue-100/45" : ""}`
+        "fixed top-0 left-0 right-0 z-50 ",
+        `${isScroll ? "shadow-md bg-blue-100/45 backdrop-blur-lg" : ""}`
       )}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
+      transition={{ delay: 0.0, type: "spring", stiffness: 100 }}
     >
       <TitleName />
 
