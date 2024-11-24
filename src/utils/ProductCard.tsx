@@ -16,7 +16,7 @@ export const ProductCard: FC<Product> = ({
   currencyCode,
 }) => {
   return (
-    <NavLink to={`/product/${id}`} className="block">
+    <NavLink to={`/product/${id}`} className="block min-w-[200px]">
       <motion.div
         className="relative group bg-gray-600/20 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden h-full transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl "
         initial={{ opacity: 0 }}
@@ -38,17 +38,20 @@ export const ProductCard: FC<Product> = ({
           {/* Product Details */}
           <CardContent className="flex flex-col flex-wrap justify-between rounded-b-lg shadow-lg py-6 bg-white  hover:shadow-lg transition-shadow duration-300">
             {/* Top Section: Product Name and Price */}
-            <div className="grid grid-cols-8 justify-between items-center border-b-2 border-gray-200 pb-3 ">
+            <div className="grid grid-cols-1 justify-between items-center border-b-2 border-gray-200 pb-3 ">
               {/* Product Name */}
-              <div className="flex items-center gap-2 col-span-5">
+              <div className="flex items-center gap-2 ">
                 <TagIcon className="w-5 h-5 text-orange-500" />
                 <span className="font-semibold text-lg text-blue-900 group-hover:text-orange-500 transition-colors duration-300">
-                  {title}
+                  {title} |
+                  <span className="ml-2 text-base font-extrabold text-blue-600">
+                    {manufacturer}
+                  </span>
                 </span>
               </div>
 
               {/* Price Button */}
-              <div className="bg-green-500 text-white font-semibold py-1 px-3 rounded-sm text-sm shadow hover:bg-green-600 transition-colors col-span-3">
+              <div className="absolute top-3 right-3 bg-green-500 text-white font-semibold py-2 px-4 rounded-tr-lg text-sm shadow hover:bg-green-600 transition-colors">
                 {price} {currencyCode}
               </div>
             </div>
