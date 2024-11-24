@@ -142,31 +142,58 @@ export const Product = () => {
                 )}
               </div>
 
-              {/* Product Description */}
-              {data.description && (
-                <div className="grid gap-6 text-md font-semibold italic leading-loose">
-                  <p>{data.description}</p>
-                </div>
-              )}
+              <div className="flex gap-3 flex-wrap py-2 font-serif font-bold text-blue-900 ">
+                {data.keywords?.length > 0 &&
+                  data.keywords.map((ele: string, idx: number) => (
+                    <p
+                      key={idx}
+                      className="text-base italic hover:scale-110 hover:bg-orange-400 p-1 hover:text-white"
+                    >
+                      #{ele}
+                    </p>
+                  ))}
+              </div>
+
               <div className="space-y-4">
                 <Accordion
                   type="single"
                   collapsible
                   className="bg-slate-500/40 shadow-md p-3 rounded-sm"
                 >
+                  {/* Product Description */}
+                  {data.description && (
+                    <AccordionItem value="description" className="">
+                      <AccordionTrigger className="no-underline">
+                        <h2 className="text-lg font-semibold text-white ">
+                          Description
+                        </h2>
+                      </AccordionTrigger>
+                      <AccordionContent className="bg-white/40 py-5 px-3">
+                        <ul className="list-disc list-inside text-gray-600 space-y-1">
+                          <div className="grid gap-6 text-md font-semibold italic leading-loose">
+                            <p>{data.description}</p>
+                          </div>
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )}
+
                   {/* Features Section */}
                   {data.bulletPoints?.length > 0 && (
                     <AccordionItem value="features" className="">
                       <AccordionTrigger>
-                        <h2 className="text-lg font-semibold text-gray-700">
+                        <h2 className="text-lg font-semibold text-white ">
                           Features
                         </h2>
                       </AccordionTrigger>
-                      <AccordionContent className="bg-white py-5 px-3">
+
+                      <AccordionContent className="bg-white/40 py-5 px-3 font-medium">
                         <ul className="list-disc list-inside text-gray-600 space-y-1">
                           {data.bulletPoints.map(
                             (point: string, index: number) => (
-                              <li key={index}>{point}</li>
+                              <li className="py-1" key={index}>
+                                {point}
+                              </li>
                             )
                           )}
                         </ul>
@@ -174,36 +201,20 @@ export const Product = () => {
                     </AccordionItem>
                   )}
 
-                  {/* Keywords Section */}
-                  {data.keywords?.length > 0 && (
-                    <AccordionItem value="keywords">
-                      <AccordionTrigger>
-                        <h2 className="text-lg font-semibold text-gray-700">
-                          Keywords
-                        </h2>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <p className="text-sm text-gray-500">
-                          {data.keywords.join(", ")}
-                        </p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  )}
-
                   {/* Variations Section */}
                   <AccordionItem value="variations">
                     <AccordionTrigger>
-                      <h2 className="text-lg font-semibold text-gray-700">
+                      <h2 className="text-lg font-semibold text-white no-underline">
                         Variations
                       </h2>
                     </AccordionTrigger>
                     <AccordionContent>
                       {data.variations?.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-white/40 p-3">
                           {data.variations.map((variation, index: number) => (
                             <div
                               key={index}
-                              className="border border-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center gap-2"
+                              className="border border-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center gap-2 bg-white"
                             >
                               {/* Image */}
                               {variation.image_url ? (
