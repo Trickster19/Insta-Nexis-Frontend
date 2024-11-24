@@ -13,7 +13,7 @@ export const Profile = () => {
   if (isError) toast.error("Please Refresh The Page");
   return (
     <>
-      <div className="p-6 mt-20 h-[80vh] relative">
+      <div className="h-[100vh] py-20 px-12 w-full relative">
         {isLoading ? (
           <div className="flex h-full items-center justify-center ">
             <Loader2
