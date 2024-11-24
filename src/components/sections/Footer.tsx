@@ -127,7 +127,7 @@ export const Footer = () => {
             rel="noopener noreferrer"
             className="font-bold text-blue-950"
           >
-            PostNexs
+            PostNexis
           </a>
         </p>
       </section>
