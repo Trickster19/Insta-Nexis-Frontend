@@ -14,7 +14,7 @@ export function TitleName() {
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 200 }}
       >
-        Insta Nexis
+        Post Nexis
       </motion.a>
     </div>
   );
