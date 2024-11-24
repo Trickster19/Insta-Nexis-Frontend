@@ -96,10 +96,10 @@ export const Product = () => {
             </div>
 
             {/* Right Side: Product Description and Details */}
-            <div className="grid gap-6 md:ml-8">
+            <div className="grid gap-6 md:ml-8 md:p-4 shadow-lg backdrop-blur-[3px] bg-white/10">
               {/* Product Header */}
               <div className="grid gap-2">
-                <h1 className="text-4xl font-bold text-blue-600">
+                <h1 className="text-5xl pb-5 border-b-2 border-blue-900 font-bold text-blue-600">
                   {data.title || "Untitled Product"}
                 </h1>
                 <div className="flex gap-2 items-baseline">
@@ -152,7 +152,7 @@ export const Product = () => {
                 <Accordion
                   type="single"
                   collapsible
-                  className="backdrop-blur-[2px] bg-slate-500/20 shadow-md p-3 rounded-sm"
+                  className="bg-slate-500/40 shadow-md p-3 rounded-sm"
                 >
                   {/* Features Section */}
                   {data.bulletPoints?.length > 0 && (
