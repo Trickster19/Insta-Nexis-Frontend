@@ -11,52 +11,57 @@ import { motion, useAnimation } from "framer-motion";
 const timelineSteps = [
   {
     title: "User Registration",
-    description:
-      "Users initiate their journey by registering on our portal, providing essential details.",
+    description: [
+      "	Users initiate their journey by registering on our portal, providing essential details to create a unique account. This ensures a seamless user experience and allows for personalized interactions within our service.",
+      "Once the user registers, we implement a verification process using a deep learning model designed to analyze data from the user’s social handles (with their consent). This model evaluates profile parameters, behavioral patterns and activity metrics to assess the likelihood of the account being genuine. By detecting potential indicators of fake or automated accounts, we can better ensure that our platform remains secure and authentic.",
+    ],
     icon: <User />,
-    bgColor: "bg-gradient-to-r from-blue-500 to-blue-700",
   },
   {
     title: "Product Listing Process",
-    description:
-      "Users create a post on their social media, mentioning our service to list products.",
+    description: [
+      "When a registered user wishes to list a new product, they simply create a post on their social media platform (e.g., Instagram) and mention our service's handle. This mention acts as a trigger for our automated system.",
+    ],
     icon: <Tag />,
-    bgColor: "bg-gradient-to-r from-orange-500 to-orange-700",
   },
   {
     title: "Webhook Activation",
-    description:
-      "Social media mentions trigger a webhook, connecting the platform with our server.",
+    description: [
+      "The mention of our service handle triggers a webhook—a real-time HTTP callback mechanism that communicates between the social media platform and our server. This event notifies our service that a new product post has been created.",
+    ],
     icon: <Code />,
-    bgColor: "bg-gradient-to-r from-blue-500 to-blue-700",
   },
   {
     title: "Content Retrieval",
-    description:
-      "We retrieve posts, fetching multimedia, captions, and hashtags for processing.",
+    description: [
+      "Our service then initiates a process to fetch the post along with its associated metadata, including multimedia, captions and hashtags. This data can be semi-structured or unstructured.",
+    ],
     icon: <Image />,
-    bgColor: "bg-gradient-to-r from-orange-500 to-orange-700",
   },
   {
     title: "Data Processing",
-    description:
-      "AI models analyze content to enhance product descriptions and metadata.",
+    description: [
+      "The retrieved content undergoes multimodal analysis through advanced Large Language Models (LLMs) and Deep Learning algorithms.",
+      "We utilize Natural Language Processing (NLP) techniques to analyze the text in the post, extracting relevant features such as product characteristics, benefits, and user sentiment.",
+      "Simultaneously, we employ Computer Vision techniques to assess images, identifying product attributes and visual elements that enhance the description.",
+    ],
     icon: <Truck />,
-    bgColor: "bg-gradient-to-r from-blue-500 to-blue-700",
   },
   {
     title: "Amazon Listing",
-    description:
-      "The system automates Amazon listing creation, including images and attributes.",
+    description: [
+      "Upon generating the product description, our system automates the listing process on Amazon. This includes creating the product entry, uploading images, and filling in the necessary attributes based on the processed content, ensuring the product is live and available for purchase.",
+      "After the product goes live, we collect customer feedback and use it to continuously improve our models, refining future content generation for enhanced accuracy and relevance.",
+    ],
     icon: <Image />,
-    bgColor: "bg-gradient-to-r from-orange-500 to-orange-700",
   },
   {
     title: "Periodic Review",
-    description:
-      "CRON jobs gather metrics and refine marketing strategies over time.",
+    description: [
+      "On a periodic basis, managed by a CRON job, our system will review the social media listings to gather insights. This involves fetching relevant metrics, comments, and engagement data from the social media posts.",
+      "○	The collected information will be analyzed to develop insights into customer perceptions and preferences, helping refine product descriptions and marketing strategies for the listed products.",
+    ],
     icon: <RefreshCcw />,
-    bgColor: "bg-gradient-to-r from-blue-500 to-blue-700",
   },
 ];
 
@@ -89,7 +94,8 @@ export default function WorkflowTimeline() {
           <VerticalTimelineElement
             key={index}
             contentStyle={{
-              background: "linear-gradient(135deg, #ffffff, #f3f6ff)",
+              background: "transparent",
+              padding: "0px",
               boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
               borderRadius: "16px",
               position: "relative",
@@ -119,21 +125,29 @@ export default function WorkflowTimeline() {
             visible={false}
           >
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{
+                opacity: 0,
+                x: index % 2 === 0 ? 100 : -100,
+                visibility: "hidden",
+              }}
+              whileInView={{ visibility: "visible", x: 0, opacity: 1 }}
+              exit={{
+                x: index % 2 === 0 ? 100 : -100,
+                visibility: "hidden",
+                opacity: 0,
+              }}
               transition={{
                 duration: 0.8,
-                delay: index * 0.3,
                 ease: "easeInOut",
               }}
-              className="relative p-8 rounded-2xl bg-gradient-to-br from-indigo-100 via-indigo-200 to-indigo-300 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
+              className="relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100/80 via-indigo-200/80 to-orange-300/80 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
               style={{
                 transform: `translateY(${index % 2 === 0 ? 20 : -20}px)`,
               }}
             >
               {/* Icon Area */}
               <div
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-full shadow-xl flex items-center justify-center -mt-6"
+                className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-full shadow-xl flex items-center justify-center -mt-4"
                 style={{
                   boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
                 }}
@@ -149,11 +163,17 @@ export default function WorkflowTimeline() {
               </div>
 
               {/* Content */}
-              <div className="pt-12">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <div className="pt-12 pb-4">
+                <h3 className="text-3xl text-center font-bold text-gray-900 mb-3">
                   {step.title}
                 </h3>
-                <p className="text-gray-700 text-lg">{step.description}</p>
+                <ul className="text-gray-700 text-md italic list-disc text-justify">
+                  {step.description.map((e, index) => (
+                    <li key={index} className="py-1">
+                      {e}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Additional parallax effect on background */}
