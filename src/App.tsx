@@ -1,16 +1,37 @@
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
-// import useStore from "@/store";
 import { router } from "./routes";
 import { Toaster } from "sonner";
+import { Modal } from "./components/Dialog";
+import { useEffect } from "react";
+import useAuth, { useDialog } from "./store";
 
-// interface CountState {
-//   count: number;
-//   increase: () => void;
-// }
 function App() {
+  const isDialogOpen = useDialog((state) => state.isDialogOpen);
+  const setIsDialogOpen = useDialog((state) => state.setIsDialogOpen);
+  const accessToken = useAuth((state) => state.accessToken);
+  useEffect(() => {
+    if (!accessToken) return;
+    console.log("UseEffect called");
+    // Check token expiration every second
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const tokenExpiry =
+        JSON.parse(atob(accessToken.split(".")[1])).exp * 1000;
+      const iat = JSON.parse(atob(accessToken.split(".")[1])).iat * 1000;
+      console.log("Token expiry check", tokenExpiry, now);
+      if (now >= tokenExpiry) {
+        setIsDialogOpen(true);
+        clearInterval(interval);
+        // Refresh token when expired
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [accessToken]);
   return (
     <>
+      <Modal />
       <Toaster richColors position="bottom-center" />
       <RouterProvider router={router} />
     </>

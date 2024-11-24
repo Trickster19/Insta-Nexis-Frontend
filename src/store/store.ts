@@ -28,3 +28,19 @@ export const useAuth = create<TokenState>()(
     { name: "access_token", storage: createJSONStorage(() => sessionStorage) }
   )
 );
+
+interface Dialog {
+  isDialogOpen: boolean;
+  setIsDialogOpen: (isDialogOpen: boolean) => void;
+}
+export const useDialog = create<Dialog>()(
+  persist(
+    (set) => ({
+      isDialogOpen: false,
+      setIsDialogOpen: (isDialogOpen: boolean) => {
+        set({ isDialogOpen });
+      },
+    }),
+    { name: "dialog", storage: createJSONStorage(() => sessionStorage) }
+  )
+);
