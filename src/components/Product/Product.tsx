@@ -50,13 +50,13 @@ export const Product = () => {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col h-[100vh] py-40 px-10 w-full relative">
+        <div className="flex flex-col h-[100vh] py-20 px-10 w-full relative">
           <main className="flex-1">
             {/* Product Details Section */}
             <section className="grid md:grid-cols-2 lg:grid-cols-[1fr_1.5fr] gap-8 items-start max-w-6xl px-4 mx-auto py-8">
               {/* Left Side: Product Image */}
               <div className="relative w-full">
-                {data.imageUrls?.length > 0 ? (
+                {data.imageUrls && data.imageUrls?.length > 0 ? (
                   <Carousel
                     className="flex flex-col w-full aspect-square object-cover shadow-lg rounded-md"
                     opts={{ loop: true }}
@@ -163,11 +163,42 @@ export const Product = () => {
                     <h2 className="text-lg font-semibold text-gray-700">
                       Variations
                     </h2>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                       {data.variations.map((variation, index) => (
-                        <li key={index}>{variation}</li>
+                        <div
+                          key={index}
+                          className="border p-4 rounded-lg shadow-sm flex flex-col items-center gap-2"
+                        >
+                          {/* Image if available */}
+                          {variation.image_url ? (
+                            <img
+                              src={variation.image_url}
+                              alt={`${variation.option} ${variation.basis}`}
+                              className="w-16 h-16 object-cover rounded-md shadow-sm"
+                            />
+                          ) : (
+                            <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md text-gray-400">
+                              No Image
+                            </div>
+                          )}
+
+                          {/* Variation Details */}
+                          <div className="text-center">
+                            <p className="text-gray-800 font-medium">
+                              {variation.basis}: {variation.option}
+                            </p>
+                            <p className="text-gray-500 text-sm">
+                              Additional Price:{" "}
+                              {variation.additional_price > 0
+                                ? `+ ${
+                                    data.currencyCode
+                                  } ${variation.additional_price.toFixed(2)}`
+                                : "Included"}
+                            </p>
+                          </div>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 ) : (
                   <p className="text-gray-500">No variations available</p>
