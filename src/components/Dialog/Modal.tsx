@@ -63,18 +63,20 @@ export function Modal() {
     <AlertDialog open={isDialogopen} onOpenChange={setIsDialogOpen}>
       <AlertDialogContent>
         <AlertDialogHeader className="text-center">
-          <AlertDialogTitle className="text-xl font-bold">
+          <AlertDialogTitle className="text-2xl py-3 border-b-4 text-center font-bold uppercase">
             Your session is about to expire
           </AlertDialogTitle>
-          <AlertDialogDescription className="mt-2 text-gray-600">
-            You will be logged out if want you to continue your session click on
-            refresh
+          <AlertDialogDescription className="mt-2 text-md text-blue-600 italic">
+            You will be logged out , if want you to continue your session click
+            on refresh
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        <div className="mt-4 flex flex-col items-center">
-          <TimerIcon className="w-20 h-20 text-orange-500 animate-pulse" />
-          <p className="mt-2 text-3xl font-semibold text-gray-800">{timer}s</p>
+        <div className="mt-4 flex flex-col items-center animate-pulse">
+          <TimerIcon className="w-20 h-20 text-orange-500" />
+          <p className="mt-2 text-3xl font-semibold text-orange-500">
+            {timer}s
+          </p>
         </div>
 
         <AlertDialogFooter

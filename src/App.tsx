@@ -2,7 +2,6 @@ import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import { router } from "./routes";
 import { Toaster } from "sonner";
-import { Modal } from "./components/Dialog";
 import { useEffect } from "react";
 import useAuth, { useDialog } from "./store";
 
@@ -13,15 +12,15 @@ function App() {
   useEffect(() => {
     if (!accessToken) return;
     console.log("UseEffect called");
-    // Check token expiration every second
+
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const tokenExpiry =
         JSON.parse(atob(accessToken.split(".")[1])).exp * 1000;
-      // const iat: number =
-      //   JSON.parse(atob(accessToken.split(".")[1])).iat * 1000;
+      const iat: number =
+        JSON.parse(atob(accessToken.split(".")[1])).iat * 1000;
 
-      if (now >= tokenExpiry) {
+      if (now >= iat + 10000) {
         setIsDialogOpen(true);
         clearInterval(interval);
         // Refresh token when expired
