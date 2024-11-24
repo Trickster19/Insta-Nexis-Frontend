@@ -6,11 +6,15 @@ import { Loader2 } from "lucide-react";
 import ServerDownSvg from "@/assets/server_down.svg";
 import NoDataSvg from "@/assets/no_data.svg";
 import { toast } from "sonner";
+import { useEffect } from "react";
 
 export const Profile = () => {
   const userName = useAuth((state) => state.userName);
   const { data, isLoading, isError } = UseProducts(userName);
-  if (isError) toast.error("Please Refresh The Page");
+
+  useEffect(() => {
+    if (isError) toast.error("Please Refresh The Page");
+  }, [isError]);
   return (
     <>
       <div className="h-[100vh] py-20 px-12 w-full relative">
@@ -49,13 +53,15 @@ export const Profile = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {data.map((product: Product, index: number) => (
               <ProductCard
-                key={product.id}
-                image={product.image[0]}
+                key={product.productId}
+                imageUrls={product.imageUrls}
                 name={product.name}
-                company={product.company}
+                manufacturer={product.manufacturer}
                 price={Number(product.price)}
                 description={product.description}
-                productId={String(index)}
+                productId={product.productId}
+                currencyCode={product.currencyCode}
+                productType={product.productType}
               />
             ))}
           </div>

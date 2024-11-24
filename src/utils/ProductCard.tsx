@@ -2,23 +2,17 @@ import { FC } from "react";
 import { CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom"; // Import NavLink for routing
+import { Product } from "./Interfaces";
 
-type ProductCardProps = {
-  image: string;
-  name: string;
-  company: string;
-  price: Number;
-  description: string;
-  productId: string; // Assuming you have a productId to use for the URL
-};
-
-export const ProductCard: FC<ProductCardProps> = ({
-  image,
+export const ProductCard: FC<Product> = ({
+  imageUrls,
   name,
-  company,
+  manufacturer,
   price,
   description,
   productId,
+  productType,
+  currencyCode,
 }) => {
   return (
     <NavLink to={`/product/${productId}`} className="block">
@@ -32,7 +26,7 @@ export const ProductCard: FC<ProductCardProps> = ({
         {/* Image Section */}
         <div className="relative w-full h-60 bg-[#d2e6fd] overflow-hidden">
           <img
-            src={image}
+            src={imageUrls[0]}
             alt={name}
             className="object-cover w-full h-full transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
@@ -43,21 +37,23 @@ export const ProductCard: FC<ProductCardProps> = ({
           {/* Product Name */}
           <div
             className="font-semibold text-xl text-gray-800 group-hover:text-[#f57c00] transition-colors duration-300 ease-in-out overflow-hidden text-ellipsis whitespace-nowrap"
-            title={name} // Tooltip to show full name on hover
+            title={name}
           >
             {name}
           </div>
 
           {/* Company Name */}
-          <div className="text-sm text-gray-500">{company}</div>
+          <div className="text-sm text-gray-500">{manufacturer}</div>
+          <div className="text-sm text-gray-500">{productType}</div>
 
           {/* Price */}
-          <div className="text-lg text-gray-900 font-bold mt-2">${price}</div>
+          <div className="text-lg text-gray-900 font-bold mt-2">
+            ${price} {currencyCode}
+          </div>
 
-          {/* Description with Ellipsis */}
           <p
             className="text-sm text-gray-600 mt-2 overflow-hidden text-ellipsis line-clamp-3 group-hover:text-gray-800 transition-colors duration-300 ease-in-out"
-            title={description} // Tooltip to show full description on hover
+            title={description}
           >
             {description}
           </p>
