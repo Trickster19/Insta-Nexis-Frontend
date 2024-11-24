@@ -17,7 +17,7 @@ export const Profile = () => {
   }, [isError]);
   return (
     <>
-      <div className="h-full py-20 px-12 w-full relative">
+      <div className="h-full min-h-[100vh] py-20 px-12 w-full relative">
         {isLoading ? (
           <div className="flex h-full items-center justify-center ">
             <Loader2

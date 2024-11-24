@@ -25,7 +25,7 @@ export const Product = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex h-full items-center justify-center ">
+        <div className="flex h-full min-h-[100vh] items-center justify-center ">
           <Loader2
             className="w-28 h-28 animate-spin "
             style={{
