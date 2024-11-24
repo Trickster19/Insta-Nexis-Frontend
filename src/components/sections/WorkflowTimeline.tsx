@@ -84,7 +84,7 @@ export default function WorkflowTimeline() {
   return (
     <div className="relative w-full py-20">
       {/* Title */}
-      <h2 className="text-4xl font-bold text-center text-blue-800 mb-16 z-10 relative">
+      <h2 className="text-4xl font-bold text-center text-orange-600 mb-16 z-10 relative uppercase">
         Workflow Of Our Solution
       </h2>
 
@@ -101,7 +101,8 @@ export default function WorkflowTimeline() {
               position: "relative",
             }}
             contentArrowStyle={{
-              borderRight: "7px solid #0461cb",
+              borderRight:
+                index % 2 === 0 ? "10px solid #0461cb" : "10px solid #f97316",
             }}
             dateClassName="text-blue-700 text-sm font-semibold"
             iconStyle={{
@@ -127,20 +128,20 @@ export default function WorkflowTimeline() {
             <motion.div
               initial={{
                 opacity: 0,
-                x: index % 2 === 0 ? 100 : -100,
+                // x: index % 2 === 0 ? 100 : -100,
                 visibility: "hidden",
               }}
               whileInView={{ visibility: "visible", x: 0, opacity: 1 }}
               exit={{
-                x: index % 2 === 0 ? 100 : -100,
+                // x: index % 2 === 0 ? 100 : -100,
                 visibility: "hidden",
                 opacity: 0,
               }}
               transition={{
-                duration: 0.8,
+                duration: 1.2,
                 ease: "easeInOut",
               }}
-              className="relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100/80 via-indigo-200/80 to-orange-300/80 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
+              className="relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100 via-indigo-200 to-orange-300 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
               style={{
                 transform: `translateY(${index % 2 === 0 ? 20 : -20}px)`,
               }}
