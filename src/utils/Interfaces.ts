@@ -1,7 +1,7 @@
 export interface Product {
-  productId: string;
+  id: string;
   imageUrls: string[]; // URL or path to the product image
-  name: string; // Name of the product
+  title: string; // Name of the product
   manufacturer: string; // Company or brand name
   price: number; // Price of the product (assuming it's a number)
   description: string;

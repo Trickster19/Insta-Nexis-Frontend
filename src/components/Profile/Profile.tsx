@@ -53,13 +53,13 @@ export const Profile = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {data.map((product: Product, index: number) => (
               <ProductCard
-                key={product.productId}
+                key={product.id}
                 imageUrls={product.imageUrls}
-                name={product.name}
+                title={product.title}
                 manufacturer={product.manufacturer}
                 price={Number(product.price)}
                 description={product.description}
-                productId={product.productId}
+                id={product.id}
                 currencyCode={product.currencyCode}
                 productType={product.productType}
               />

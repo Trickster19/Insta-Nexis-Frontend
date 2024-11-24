@@ -7,7 +7,7 @@ const fetchAllProducts = async (accessToken: string | null) => {
         Authorization: accessToken,
       },
     });
-
+    console.log(data);
     return data.data;
   } catch (err: any) {
     if (err?.response.status === 500) {

@@ -6,16 +6,16 @@ import { Product } from "./Interfaces";
 
 export const ProductCard: FC<Product> = ({
   imageUrls,
-  name,
+  title: name,
   manufacturer,
   price,
   description,
-  productId,
+  id,
   productType,
   currencyCode,
 }) => {
   return (
-    <NavLink to={`/product/${productId}`} className="block">
+    <NavLink to={`/product/${id}`} className="block">
       <motion.div
         className="relative group bg-[#d2e6fd] rounded-xl shadow-lg overflow-hidden h-full transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
         initial={{ opacity: 0 }}
