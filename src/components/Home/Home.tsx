@@ -1,4 +1,3 @@
-import { Footer } from "../sections/Footer";
 import Hero from "../sections/Hero";
 import WorkflowTimeline from "../sections/WorkflowTimeline";
 
@@ -7,7 +6,6 @@ export const Home = () => {
     <>
       <Hero />
       <WorkflowTimeline />
-      <Footer />
     </>
   );
 };

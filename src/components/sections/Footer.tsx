@@ -3,49 +3,63 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import LogoIcon from "@/assets/PostNexisLogo.png";
+import { Facebook, Instagram, Mails } from "lucide-react";
 
 export const Footer = () => {
   return (
     <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white pt-16 pb-8">
-      <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-12 lg:px-20">
+      <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 ">
         {/* Left Section: Logo and Details */}
         <div className="flex flex-col gap-8">
           {/* Logo Section */}
-          <div className="flex flex-col  gap-4">
+          <div className="flex flex-col items-center gap-4">
             <img
               src={LogoIcon}
               alt="Logo"
-              className="w-32 h-32 rounded-full bg-white shadow-sm"
+              className="w-32 h-32 rounded-full  bg-white shadow-sm"
             />
-            <div>
-              <h1 className="text-3xl font-extrabold"></h1>
-              <p className="text-sm font-light opacity-80">
-                Building elegant, modern, and responsive UI components.
+            <div className="text-center">
+              <h3 className="text-lg font-bold text-blue-800 py-2">
+                Instagram Meets Amazon: Where Posts Become Products
+              </h3>
+              <p className="text-sm text-blue-800 italic text-justify opacity-80 pt-2">
+                InstaNexis seamlessly bridges the gap between Instagram and
+                Amazon, transforming social media content into Amazon-compliant
+                product listings. This automated tool eliminates the
+                complexities of manual listings, saving sellers time and effort.
+                With InstaNexis, your Instagram posts instantly become
+                Amazon-ready, boosting product visibility and customer
+                engagement.
               </p>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-2">
-              <a href="#" className="hover:underline">
-                Features
+          <div className=" flex flex-col  items-center pt-4">
+            <h3 className="text-lg font-semibold mb-10 text-orange-600">
+              Quick Links
+            </h3>
+            <div className="grid grid-cols-3 gap-x-24 gap-y-4 text-sm">
+              <a
+                href="mailto:postnexis@gmail.com"
+                className="hover:text-orange-600  flex items-center gap-2"
+              >
+                <Mails />
+                Email us
               </a>
-              <a href="#" className="hover:underline">
-                Pricing
+              <a
+                href="https://www.instagram.com/postnexis"
+                className="hover:text-orange-600 flex items-center gap-2"
+              >
+                <Instagram />
+                Instagram
               </a>
-              <a href="#" className="hover:underline">
-                FAQ
-              </a>
-              <a href="#" className="hover:underline">
-                Github
-              </a>
-              <a href="#" className="hover:underline">
-                Twitter
-              </a>
-              <a href="#" className="hover:underline">
-                Dribbble
+              <a
+                href="https://www.facebook.com/postnexis"
+                className="hover:text-orange-600 flex items-center gap-2"
+              >
+                <Facebook />
+                Facebook
               </a>
             </div>
           </div>

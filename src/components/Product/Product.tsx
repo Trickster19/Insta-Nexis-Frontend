@@ -56,7 +56,7 @@ export const Product = () => {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col h-[100vh] overflow-auto py-20 px-10 w-full relative">
+        <div className="flex flex-col h-full overflow-auto py-20 px-10 w-full relative">
           {/* Product Details Section */}
           <section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_1.5fr] gap-8 items-start max-w-6xl md:px-4 mx-auto py-6">
             {/* Left Side: Product Image */}
