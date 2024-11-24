@@ -3,7 +3,7 @@ import { CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom"; // Import NavLink for routing
 import { Product } from "./Interfaces";
-import { Building, Info, TagIcon } from "lucide-react";
+import { Info, TagIcon } from "lucide-react";
 
 export const ProductCard: FC<Product> = ({
   imageUrls,
