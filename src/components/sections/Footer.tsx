@@ -6,7 +6,7 @@ import LogoIcon from "@/assets/PostNexisLogo.png";
 
 export const Footer = () => {
   return (
-    <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white py-16">
+    <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white pt-16 pb-8">
       <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-12 lg:px-20">
         {/* Left Section: Logo and Details */}
         <div className="flex flex-col gap-8">
@@ -118,7 +118,7 @@ export const Footer = () => {
       </section>
 
       {/* Bottom Section */}
-      <section className="mt-12 text-center text-base border-t border-white/30 pt-6">
+      <section className="mt-12 text-center text-base border-t-4 border-white/30 pt-6">
         <p>
           &copy; 2024 Made by{" "}
           <a
