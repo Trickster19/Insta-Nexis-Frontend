@@ -73,7 +73,7 @@ export const Navbar = () => {
               onClick={() => navigate("/profile")}
               className="rounded-full font-semibold flex gap-x-1 items-center text-[#f57c00]  hover:text-[##e65100] transition-all duration-300 ease-in-out p-1 px-2 uppercase"
             >
-              <Target size={28} /> <span>Profile</span>
+              <Target size={28} /> <span>Products</span>
             </a>
           </motion.div>
 
@@ -109,7 +109,7 @@ export const Navbar = () => {
                   <Button
                     onClick={() => {
                       setAccessToken(null);
-                      toast.success("User Login Out Successful");
+                      toast.success("User Logged Out Successful");
                       navigate("/");
                     }}
                     className=" w-full rounded-sm bg-[#f57c00] text-white hover:bg-[#e65100] hover:text-[#e8efe7] transition-all duration-300 ease-in-out py-1 px-3 uppercase"

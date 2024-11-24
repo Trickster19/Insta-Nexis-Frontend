@@ -6,30 +6,35 @@ import { jwtDecode } from "jwt-decode";
 import useAuth from "@/store";
 import loginApi from "@/api/loginApi";
 import { toast } from "sonner";
+import { useSessionDetails } from "@/store/store";
+
 // Define the type of the decoded JWT token
 
 // Function to handle the login request
 
-export const useLogin = () => {
+export const useLogin = (redirect?: boolean) => {
   const navigate = useNavigate();
   const { setAccessToken, setUserName } = useAuth((state) => state);
+  const { setSessionDetails } = useSessionDetails((state) => state);
 
   const mutation = useMutation({
     mutationFn: (credentials: loginInterface) =>
       loginApi(credentials.username, credentials.password),
-    onSuccess: (token: string) => {
+    onSuccess: (token: string, credentials: loginInterface) => {
       try {
         // Decode the JWT token
         const decoded: DecodedJWT = jwtDecode(token);
 
         setAccessToken(token);
+        setSessionDetails(credentials);
         setUserName(decoded.sub);
         toast.success("User Login Successful");
-        // Redirect to the profile page
-        navigate("/profile");
+
+        if (redirect == undefined || redirect === null || redirect === true)
+          navigate("/profile");
       } catch (error) {
-        toast.error("Some Error Occured, Please Try Again ");
-        console.error("Error occured:", error);
+        toast.error("Some Error Occurred, Please Try Again");
+        console.error("Error occurred:", error);
       }
     },
     onError: (error: Error) => {

@@ -18,8 +18,9 @@ function App() {
       const now = new Date().getTime();
       const tokenExpiry =
         JSON.parse(atob(accessToken.split(".")[1])).exp * 1000;
-      const iat = JSON.parse(atob(accessToken.split(".")[1])).iat * 1000;
-      console.log("Token expiry check", tokenExpiry, now);
+      // const iat: number =
+      //   JSON.parse(atob(accessToken.split(".")[1])).iat * 1000;
+
       if (now >= tokenExpiry) {
         setIsDialogOpen(true);
         clearInterval(interval);
@@ -31,7 +32,6 @@ function App() {
   }, [accessToken]);
   return (
     <>
-      <Modal />
       <Toaster richColors position="bottom-center" />
       <RouterProvider router={router} />
     </>

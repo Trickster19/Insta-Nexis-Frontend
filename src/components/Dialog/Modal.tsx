@@ -1,19 +1,18 @@
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import useAuth, { useDialog } from "@/store";
-import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TimerIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useLogin } from "@/hooks/UseLogin";
+import { useSessionDetails } from "@/store/store";
+import { loginInterface } from "@/utils/Interfaces";
 
 export function Modal() {
   const isDialogopen = useDialog((state) => state.isDialogOpen);
@@ -21,13 +20,20 @@ export function Modal() {
   const [timer, setTimer] = useState(15);
   const setAccessToken = useAuth((state) => state.setAccessToken);
 
+  const getDecodedSessionDetails = useSessionDetails(
+    (state) => state.getDecodedSessionDetails
+  );
+  const mutation = useLogin(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const interval = useRef<any>(null);
+
   useEffect(() => {
     if (!isDialogopen) return;
 
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       setTimer((prev) => {
         if (prev <= 1) {
-          clearInterval(interval);
+          if (interval.current !== null) clearInterval(interval.current);
           handleTimerEnd();
           return 0;
         }
@@ -35,12 +41,22 @@ export function Modal() {
       });
     }, 1000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount or dialog close
+    return () => clearInterval(interval.current);
   }, [isDialogopen]);
 
   const handleTimerEnd = () => {
     setAccessToken(null);
     setIsDialogOpen(false);
+  };
+
+  const handleRefreshSession = () => {
+    const details: loginInterface | null = getDecodedSessionDetails();
+
+    if (details) {
+      mutation.mutate(details);
+    } else {
+      handleTimerEnd();
+    }
   };
 
   return (
@@ -66,7 +82,7 @@ export function Modal() {
           style={{ justifyContent: "center", flexDirection: "column" }}
         >
           <AlertDialogAction
-            onClick={handleTimerEnd}
+            onClick={handleRefreshSession}
             className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md"
           >
             Retain Session
