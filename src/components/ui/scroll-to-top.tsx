@@ -26,12 +26,12 @@ export const ScrollToTop = () => {
   return (
     <>
       {showTopBtn && (
-        <Button
+        <a
           onClick={goToTop}
-          className="fixed bottom-4 right-4 shadow-md bg-blue-800 text-white z-50 scroll-smooth transition-all duration-500 p-4"
+          className="fixed bottom-4 right-4 shadow-md bg-blue-800 text-white z-50 scroll-smooth transition-all duration-500 rounded w-11 h-11 p-2"
         >
-          <ArrowUp className="w-10 h-10" />
-        </Button>
+          <ArrowUp className="w-full h-full" />
+        </a>
       )}
     </>
   );
