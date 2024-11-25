@@ -1,9 +1,9 @@
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
-import { router } from "./routes";
+import { router } from "@/routes";
 import { Toaster } from "sonner";
 import { useEffect } from "react";
-import useAuth, { useDialog } from "./store";
+import useAuth, { useDialog } from "@/store";
 
 function App() {
   // const isDialogOpen = useDialog((state) => state.isDialogOpen);

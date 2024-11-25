@@ -1,4 +1,4 @@
-import { fetchProduct } from "@/api/fetchProduct";
+import { fetchProduct } from "@/api";
 import useAuth from "@/store";
 import { useQuery } from "@tanstack/react-query";
 

@@ -1,11 +1,11 @@
 export interface Product {
   id: string;
-  imageUrls: string[]; // URL or path to the product image
-  title: string; // Name of the product
-  manufacturer: string; // Company or brand name
-  price: number; // Price of the product (assuming it's a number)
+  imageUrls: string[];
+  title: string;
+  manufacturer: string;
+  price: number;
   description: string;
-  currencyCode: string; // Product description
+  currencyCode: string;
   productType: string;
 }
 export interface Role {
@@ -14,10 +14,10 @@ export interface Role {
 
 export interface DecodedJWT {
   jti: string;
-  sub: string; // Subject of the token (e.g., username or user identifier)
-  roles: Role[]; // Array of roles, each containing an 'authority'
-  iat: number; // Issued at time (Unix timestamp)
-  exp: number; // Expiration time (Unix timestamp)
+  sub: string;
+  roles: Role[];
+  iat: number;
+  exp: number;
 }
 export interface loginInterface {
   username: string;
@@ -29,4 +29,10 @@ export interface UserInfo {
   password: string;
   name: string;
   companyName: string;
+}
+
+export interface ContactInterface {
+  name: string;
+  email: string;
+  message: string;
 }

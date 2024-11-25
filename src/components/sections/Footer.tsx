@@ -3,9 +3,39 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import LogoIcon from "@/assets/PostNexisLogo.png";
-import { Facebook, Instagram, Mails } from "lucide-react";
+import { Facebook, Instagram, Mails, Loader2 } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactUsSchema } from "@/utils/FormSchemas";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useContact } from "@/hooks/UseContact";
+
+type ContactUsFormValues = z.infer<typeof contactUsSchema>;
 
 export const Footer = () => {
+  const contact = useContact();
+  const form = useForm<ContactUsFormValues>({
+    resolver: zodResolver(contactUsSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onContactSubmit = (data: ContactUsFormValues) => {
+    contact.mutate(data);
+    if (contact.isSuccess) form.reset();
+  };
+
   return (
     <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white pt-16 pb-8">
       <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 ">
@@ -73,60 +103,90 @@ export const Footer = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form className="space-y-6">
-              {/* Name Input */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Your Name
-                </label>
-                <Input
-                  type="text"
-                  id="name"
-                  placeholder="Enter your name"
-                  className="mt-1 bg-white p-3 text-blue-600"
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onContactSubmit)}
+                className="space-y-6"
+              >
+                {/* Name Field */}
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="block text-sm font-medium text-gray-700">
+                        Your Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Enter your name"
+                          className="mt-1 bg-white p-3 text-blue-600"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              {/* Email Input */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Your Email
-                </label>
-                <Input
-                  type="email"
-                  id="email"
-                  placeholder="Enter your email"
-                  className="mt-1 bg-white p-3 text-blue-600"
+                {/* Email Field */}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="block text-sm font-medium text-gray-700">
+                        Your Email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="Enter your email"
+                          className="mt-1 bg-white p-3 text-blue-600"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              {/* Message Input */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Your Message
-                </label>
-                <Textarea
-                  id="message"
-                  rows={4}
-                  placeholder="Enter your message"
-                  className="mt-1 bg-white p-3 text-blue-600"
+                {/* Message Field */}
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="block text-sm font-medium text-gray-700">
+                        Your Message
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          rows={4}
+                          placeholder="Enter your message"
+                          className="mt-1 bg-white p-3 text-blue-600"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              {/* Submit Button */}
-              <Button className="w-full uppercase bg-blue-800 hover:bg-orange-700">
-                Submit
-              </Button>
-            </form>
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  className="w-full uppercase  bg-blue-800 hover:bg-orange-700"
+                  disabled={contact.isLoading}
+                >
+                  {contact.isLoading && (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  )}
+                  Send Message
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </section>
