@@ -168,7 +168,7 @@ export const Product = () => {
                           Description
                         </h2>
                       </AccordionTrigger>
-                      <AccordionContent className="bg-slate-500/50 py-5 px-3">
+                      <AccordionContent className="bg-slate-400/40 py-5 px-3">
                         <ul className="list-disc list-inside text-gray-900 space-y-1">
                           <div className="grid gap-6 text-md font-semibold italic leading-loose">
                             <p>{data.description}</p>
@@ -187,7 +187,7 @@ export const Product = () => {
                         </h2>
                       </AccordionTrigger>
 
-                      <AccordionContent className="bg-slate-500/50 py-5 px-3 font-medium">
+                      <AccordionContent className="bg-slate-400/40 py-5 px-3 font-medium">
                         <ul className="list-disc list-inside text-gray-900 space-y-1">
                           {data.bulletPoints.map(
                             (point: string, index: number) => (
@@ -210,7 +210,7 @@ export const Product = () => {
                     </AccordionTrigger>
                     <AccordionContent>
                       {data.variations?.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-500/50 p-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-400/40 p-3">
                           {data.variations.map(
                             (variation: any, index: number) => (
                               <div
@@ -225,7 +225,7 @@ export const Product = () => {
                                     className="w-16 h-16 object-cover rounded-md shadow-sm"
                                   />
                                 ) : (
-                                  <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md text-gray-900">
+                                  <div className="w-16 h-16 flex items-center justify-center bg-white rounded-md text-gray-900">
                                     No Image
                                   </div>
                                 )}
