@@ -170,7 +170,7 @@ export const Product = () => {
                       </AccordionTrigger>
                       <AccordionContent className="bg-slate-400/40 py-5 px-3">
                         <ul className="list-disc list-inside text-gray-900 space-y-1">
-                          <div className="grid gap-6 text-md font-semibold italic leading-loose">
+                          <div className="grid gap-6 text-md px-8 font-semibold italic leading-loose">
                             <p>{data.description}</p>
                           </div>
                         </ul>
@@ -187,11 +187,11 @@ export const Product = () => {
                         </h2>
                       </AccordionTrigger>
 
-                      <AccordionContent className="bg-slate-400/40 py-5 px-3 font-medium">
-                        <ul className="list-disc list-inside text-gray-900 space-y-1">
+                      <AccordionContent className="bg-slate-400/40 rounded-sm py-5 px-3 font-medium">
+                        <ul className="list-disc list-inside  text-gray-900 space-y-1">
                           {data.bulletPoints.map(
                             (point: string, index: number) => (
-                              <li className="py-1" key={index}>
+                              <li className="px-8 py-1" key={index}>
                                 {point}
                               </li>
                             )
