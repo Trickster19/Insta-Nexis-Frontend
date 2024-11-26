@@ -96,10 +96,10 @@ export const Product = () => {
             </div>
 
             {/* Right Side: Product Description and Details */}
-            <div className="grid gap-6 md:ml-8 md:p-4 shadow-lg backdrop-blur-[3px] bg-white/10">
+            <div className="grid gap-6 md:ml-8 md:p-4 shadow-lg backdrop-blur-[3px] bg-blue-200/50 rounded-md">
               {/* Product Header */}
               <div className="grid gap-2">
-                <h1 className="text-5xl pb-5 border-b-2 border-blue-900 font-bold text-blue-600">
+                <h1 className="text-4xl pb-5 border-b-2 border-blue-900 font-bold text-blue-600">
                   {data.title || "Untitled Product"}
                 </h1>
                 <div className="flex gap-2 items-baseline">
@@ -164,12 +164,12 @@ export const Product = () => {
                   {data.description && (
                     <AccordionItem value="description" className="">
                       <AccordionTrigger className="no-underline">
-                        <h2 className="text-lg font-semibold text-white ">
+                        <h2 className="text-lg font-semibold text-blue-900 ">
                           Description
                         </h2>
                       </AccordionTrigger>
-                      <AccordionContent className="bg-white/40 py-5 px-3">
-                        <ul className="list-disc list-inside text-gray-600 space-y-1">
+                      <AccordionContent className="bg-slate-500/50 py-5 px-3">
+                        <ul className="list-disc list-inside text-gray-900 space-y-1">
                           <div className="grid gap-6 text-md font-semibold italic leading-loose">
                             <p>{data.description}</p>
                           </div>
@@ -182,13 +182,13 @@ export const Product = () => {
                   {data.bulletPoints?.length > 0 && (
                     <AccordionItem value="features" className="">
                       <AccordionTrigger>
-                        <h2 className="text-lg font-semibold text-white ">
+                        <h2 className="text-lg font-semibold text-blue-900 ">
                           Features
                         </h2>
                       </AccordionTrigger>
 
-                      <AccordionContent className="bg-white/40 py-5 px-3 font-medium">
-                        <ul className="list-disc list-inside text-gray-600 space-y-1">
+                      <AccordionContent className="bg-slate-500/50 py-5 px-3 font-medium">
+                        <ul className="list-disc list-inside text-gray-900 space-y-1">
                           {data.bulletPoints.map(
                             (point: string, index: number) => (
                               <li className="py-1" key={index}>
@@ -204,49 +204,53 @@ export const Product = () => {
                   {/* Variations Section */}
                   <AccordionItem value="variations">
                     <AccordionTrigger>
-                      <h2 className="text-lg font-semibold text-white no-underline">
+                      <h2 className="text-lg font-semibold text-blue-900 no-underline">
                         Variations
                       </h2>
                     </AccordionTrigger>
                     <AccordionContent>
                       {data.variations?.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-white/40 p-3">
-                          {data.variations.map((variation, index: number) => (
-                            <div
-                              key={index}
-                              className="border border-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center gap-2 bg-white"
-                            >
-                              {/* Image */}
-                              {variation.image_url ? (
-                                <img
-                                  src={variation.image_url}
-                                  alt={`${variation.option} ${variation.basis}`}
-                                  className="w-16 h-16 object-cover rounded-md shadow-sm"
-                                />
-                              ) : (
-                                <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md text-gray-400">
-                                  No Image
-                                </div>
-                              )}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 bg-slate-500/50 p-3">
+                          {data.variations.map(
+                            (variation: any, index: number) => (
+                              <div
+                                key={index}
+                                className="border border-gray-200 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center gap-2 bg-white"
+                              >
+                                {/* Image */}
+                                {variation.image_url ? (
+                                  <img
+                                    src={variation.image_url}
+                                    alt={`${variation.option} ${variation.basis}`}
+                                    className="w-16 h-16 object-cover rounded-md shadow-sm"
+                                  />
+                                ) : (
+                                  <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md text-gray-900">
+                                    No Image
+                                  </div>
+                                )}
 
-                              {/* Details */}
-                              <div className="text-center">
-                                <p className="text-gray-800 font-medium">
-                                  {variation.basis}: {variation.option}
-                                </p>
-                                <p className="text-gray-500 text-sm">
-                                  Additional Price:{" "}
-                                  {variation.additional_price > 0
-                                    ? `+ ${
-                                        data.currencyCode
-                                      } ${variation.additional_price.toFixed(
-                                        2
-                                      )}`
-                                    : "Included"}
-                                </p>
+                                {/* Details */}
+                                <div className="text-center">
+                                  <p className="text-gray-800 text-sm font-semibold">
+                                    {variation.basis}: {variation.option}
+                                  </p>
+                                  <p className="text-gray-700 text-xs">
+                                    Additional Price:{" "}
+                                  </p>
+                                  <p className="text-gray-700 text-xs">
+                                    {variation.additional_price > 0
+                                      ? `+ ${
+                                          data.currencyCode
+                                        } ${variation.additional_price.toFixed(
+                                          2
+                                        )}`
+                                      : "Included"}
+                                  </p>
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            )
+                          )}
                         </div>
                       ) : (
                         <p className="text-gray-500">No variations available</p>
