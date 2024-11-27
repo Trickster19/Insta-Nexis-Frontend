@@ -2,9 +2,13 @@
 import { UserInfo } from "@/utils/Interfaces";
 import { api } from "./api";
 
+const path = import.meta.env.VITE_ENV_DEV
+  ? "/auth/registerDummy"
+  : "/auth/register";
+
 const registerApi = async (userInfo: UserInfo) => {
   try {
-    const { data } = await api.post("/auth/registerDummy", userInfo); // Adjust API endpoint as needed
+    const { data } = await api.post(path, userInfo); // Adjust API endpoint as needed
 
     return data.success; // Assuming the API returns the JWT token
   } catch (error: any) {
