@@ -37,10 +37,10 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white pt-16 pb-8">
+    <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white p-5 md:p-1 pt-16  pb-8">
       <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 ">
         {/* Left Section: Logo and Details */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 p-4 md:p-0">
           {/* Logo Section */}
           <div className="flex flex-col items-center gap-4">
             <img
@@ -69,7 +69,7 @@ export const Footer = () => {
             <h3 className="text-lg font-semibold mb-10 text-orange-600">
               Quick Links
             </h3>
-            <div className="grid grid-cols-3 gap-x-24 gap-y-4 text-sm">
+            <div className="grid grid-cols-3 gap-x-3 md:gap-x-24 gap-y-4 text-lg md:text-sm">
               <a
                 href="mailto:postnexis@gmail.com"
                 className="hover:text-orange-600  flex items-center gap-2"

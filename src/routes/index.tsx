@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import Layout from "@/components/Layout";
 import AuthLayout from "@/components/Layout/Auth";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import { Loader2, LoaderPinwheel } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 // Lazy load components
 const Home = lazy(() => import("@/components/Home"));

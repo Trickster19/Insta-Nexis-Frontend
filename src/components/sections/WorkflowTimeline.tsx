@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -141,7 +141,7 @@ export default function WorkflowTimeline() {
                 duration: 1.2,
                 ease: "easeInOut",
               }}
-              className="relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100 via-indigo-200 to-orange-300 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
+              className="h-full relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100 via-indigo-200 to-orange-300 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
               style={{
                 transform: `translateY(${index % 2 === 0 ? 20 : -20}px)`,
               }}
@@ -178,13 +178,6 @@ export default function WorkflowTimeline() {
               </div>
 
               {/* Additional parallax effect on background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-blue-300 via-transparent to-transparent opacity-40"
-                style={{
-                  zIndex: -1,
-                  transform: `translateY(${scrollY / 30}px)`,
-                }}
-              ></motion.div>
             </motion.div>
           </VerticalTimelineElement>
         ))}
