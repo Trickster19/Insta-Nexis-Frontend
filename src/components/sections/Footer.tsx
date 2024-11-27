@@ -37,7 +37,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white p-5 md:p-1 pt-16  pb-8">
+    <footer className="bg-gradient-to-tr from-blue-400/60 via-trasparent to-orange-400/60 text-white p-5 pt-16 md:p-1 md:pt-16   pb-8">
       <section className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 ">
         {/* Left Section: Logo and Details */}
         <div className="flex flex-col gap-8 p-4 md:p-0">
