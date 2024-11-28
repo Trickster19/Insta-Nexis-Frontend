@@ -25,7 +25,7 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="mb-6"
         >
-          <h1 className="h-32 text-5xl md:text-6xl font-extrabold text-[#ff8d3b] drop-shadow-lg uppercase mb-4 leading-tight">
+          <h1 className="h-52 md:h-32 text-5xl md:text-6xl font-extrabold text-[#ff8d3b] drop-shadow-lg uppercase mb-4 leading-tight">
             <Typewriter
               options={{
                 strings: [
@@ -39,7 +39,7 @@ const Hero = () => {
             />
           </h1>
         </motion.div>
-        <p className="text-lg md:text-xl text-[#0f2a54] mb-8">
+        <p className="text-lg md:text-xl text-[#0f2a54] mb-8 ">
           Empowering professionals like you to achieve your dreams. Let’s begin
           a new chapter, together.
         </p>

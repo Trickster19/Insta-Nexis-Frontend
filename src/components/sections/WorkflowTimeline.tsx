@@ -96,9 +96,8 @@ export default function WorkflowTimeline() {
             contentStyle={{
               background: "transparent",
               padding: "0px",
-              boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+              boxShadow: "none",
               borderRadius: "16px",
-              position: "relative",
             }}
             contentArrowStyle={{
               borderRight:
@@ -128,23 +127,19 @@ export default function WorkflowTimeline() {
             <motion.div
               initial={{
                 opacity: 0,
-                // x: index % 2 === 0 ? 100 : -100,
+
                 visibility: "hidden",
               }}
               whileInView={{ visibility: "visible", x: 0, opacity: 1 }}
               exit={{
-                // x: index % 2 === 0 ? 100 : -100,
                 visibility: "hidden",
                 opacity: 0,
               }}
               transition={{
-                duration: 1.2,
+                duration: 0.8,
                 ease: "easeInOut",
               }}
-              className="h-full relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100 via-indigo-200 to-orange-300 shadow-xl backdrop-blur-md backdrop-brightness-110 overflow-hidden"
-              style={{
-                transform: `translateY(${index % 2 === 0 ? 20 : -20}px)`,
-              }}
+              className="h-full relative p-10 rounded-2xl bg-gradient-to-br from-indigo-100 via-indigo-200 to-orange-300 shadow-xl backdrop-blur-md backdrop-brightness-110"
             >
               {/* Icon Area */}
               <div

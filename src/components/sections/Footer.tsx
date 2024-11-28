@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import LogoIcon from "@/assets/PostNexisLogo.png";
+import LogoIcon from "@/assets/PostNexisLogo.webp";
 import { Facebook, Instagram, Mails, Loader2 } from "lucide-react";
 import {
   Form,
