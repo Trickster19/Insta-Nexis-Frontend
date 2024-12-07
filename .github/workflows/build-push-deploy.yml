@@ -33,6 +33,7 @@ jobs:
       - name: Generate .env file
         run: |
           echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" > .env
+          echo "VITE_SECRET_KEY=${{ secrets.VITE_SECRET_KEY }}" >> .env
       # Install dependencies and build the app
       - name: Install dependencies and build
         run: |
