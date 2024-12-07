@@ -53,7 +53,10 @@ export const useAuth = create<TokenState>()(
         set({ userName });
       },
     }),
-    { name: "access_token", storage: createJSONStorage(() => sessionStorage) }
+    {
+      name: "access_token",
+      storage: createJSONStorage(() => new EncryptedStorage()),
+    }
   )
 );
 
@@ -69,7 +72,7 @@ export const useDialog = create<Dialog>()(
         set({ isDialogOpen });
       },
     }),
-    { name: "dialog", storage: createJSONStorage(() => sessionStorage) }
+    { name: "dialog", storage: createJSONStorage(() => new EncryptedStorage()) }
   )
 );
 
