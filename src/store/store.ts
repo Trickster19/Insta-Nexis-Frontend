@@ -1,8 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { createJSONStorage, persist, PersistStorage } from "zustand/middleware";
 import CryptoJS from "crypto-js";
 
 const SECRET_KEY = import.meta.env.VITE_SECRET_KEY || "your-secret-key";
+
+export class EncryptedStorage implements PersistStorage<any> {
+  getItem(key: string): any | undefined {
+    const value = sessionStorage.getItem(key);
+
+    if (value) {
+      const decryptedBytes = CryptoJS.AES.decrypt(value, SECRET_KEY);
+      const decryptedValue = decryptedBytes.toString(CryptoJS.enc.Utf8);
+      return decryptedValue;
+    }
+
+    return value;
+  }
+
+  setItem(key: string, value: any): void {
+    const encrypted = CryptoJS.AES.encrypt(value, SECRET_KEY).toString();
+    sessionStorage.setItem(key, encrypted);
+  }
+
+  removeItem(key: string): void {
+    sessionStorage.removeItem(key);
+  }
+}
+
 interface TokenState {
   accessToken: string | null;
   isAuth: boolean;
@@ -82,7 +107,7 @@ export const useSessionDetails = create<SessionDetails>()(
 
     {
       name: "session_details",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => new EncryptedStorage()),
     }
   )
 );
